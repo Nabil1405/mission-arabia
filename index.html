@@ -1,78 +1,1272 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mission : العربية</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission : العربية — Jeu d'apprentissage</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#f7f2e8,#eadbc8);color:#2f241d;padding:20px}.app{max-width:800px;margin:auto;background:#fffdf9;border-radius:26px;overflow:hidden;box-shadow:0 18px 50px #37261922}header{background:#3f2b20;color:#fff;padding:22px 26px;display:flex;justify-content:space-between;align-items:center}header h1{margin:0;font-size:24px}header p{margin:5px 0 0;opacity:.8;font-size:13px}.badge{background:#ffffff18;padding:10px 14px;border-radius:12px;font-weight:bold}main{padding:28px}.screen{display:none}.screen.active{display:block}.center{text-align:center;padding:20px 5px}.arabic{font-size:clamp(45px,10vw,70px);direction:rtl;color:#3f2b20;font-weight:bold;margin:10px}h2{font-size:28px}p{line-height:1.6;color:#6d5a4b}input{width:100%;padding:15px;border:2px solid #e1d5c8;border-radius:13px;font-size:17px;margin:8px 0 15px;outline:none}.primary,.secondary{border:0;border-radius:13px;padding:14px 24px;font-weight:bold;font-size:16px;cursor:pointer}.primary{background:#8b5e3c;color:#fff}.secondary{background:#eee5da;color:#3f2b20}.error{color:#a32f27;font-weight:bold;min-height:25px}.status{font-size:14px;min-height:22px;margin-top:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.stat{background:#f5eee5;padding:11px;border-radius:13px;text-align:center;font-size:13px}.stat strong{display:block;font-size:18px;margin-top:4px}.progress{height:9px;background:#eee5da;border-radius:99px;overflow:hidden;margin-bottom:25px}.bar{height:100%;background:#8b5e3c;width:0;transition:.3s}.q{text-align:center}.q img{width:min(280px,80%);height:190px;object-fit:cover;border-radius:18px}.question{font-size:28px;direction:rtl;font-weight:bold;margin:20px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{background:#fff;border:2px solid #e4d9cd;border-radius:13px;padding:15px;font-size:20px;cursor:pointer;direction:rtl}.answer.correct{background:#e7f5e9;border-color:#55a563}.answer.wrong{background:#fae9e7;border-color:#d86b60}.feedback{text-align:center;min-height:30px;font-weight:bold;margin:15px}.next{text-align:center}.trophy{font-size:65px}.resultbox{background:#f5eee5;border-radius:15px;padding:18px;margin:20px auto;max-width:300px;font-size:18px}.resultbox strong{display:block;font-size:28px;margin-top:5px}@media(max-width:560px){body{padding:0}.app{min-height:100vh;border-radius:0}main{padding:20px}.answers{grid-template-columns:1fr}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, "Noto Sans", sans-serif;
+  background: linear-gradient(135deg, #f7f2e8, #eadbc8);
+  color: #2f241d;
+  padding: 20px;
+}
+
+.app {
+  width: min(800px, 100%);
+  margin: auto;
+  background: #fffdf9;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(55,38,25,.15);
+}
+
+header {
+  background: #3f2b20;
+  color: white;
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+header p {
+  margin: 5px 0 0;
+  opacity: .8;
+  font-size: 13px;
+}
+
+.badge {
+  background: #ffffff18;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+main {
+  padding: 28px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+.center {
+  text-align: center;
+  padding: 20px 5px;
+}
+
+.arabic-title {
+  font-size: clamp(45px, 10vw, 70px);
+  direction: rtl;
+  color: #3f2b20;
+  font-weight: bold;
+  margin: 10px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+p {
+  line-height: 1.6;
+  color: #6d5a4b;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e1d5c8;
+  border-radius: 13px;
+  font-size: 17px;
+  margin: 8px 0 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #8b5e3c;
+}
+
+.primary,
+.secondary {
+  border: 0;
+  border-radius: 13px;
+  padding: 14px 24px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.primary {
+  background: #8b5e3c;
+  color: white;
+}
+
+.primary:hover {
+  background: #744c30;
+}
+
+.secondary {
+  background: #eee5da;
+  color: #3f2b20;
+}
+
+.error {
+  color: #a32f27;
+  font-weight: bold;
+  min-height: 25px;
+}
+
+.status {
+  font-size: 14px;
+  min-height: 22px;
+  margin-top: 12px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.stat {
+  background: #f5eee5;
+  padding: 11px;
+  border-radius: 13px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.progress {
+  height: 9px;
+  background: #eee5da;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.bar {
+  height: 100%;
+  background: #8b5e3c;
+  width: 0;
+  transition: .3s;
+}
+
+.q {
+  text-align: center;
+}
+
+.q img {
+  width: min(280px, 80%);
+  height: 190px;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #eee5da;
+}
+
+.question {
+  font-size: 28px;
+  direction: rtl;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.answer {
+  background: #fff;
+  border: 2px solid #e4d9cd;
+  border-radius: 13px;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  direction: rtl;
+}
+
+.answer:hover {
+  border-color: #8b5e3c;
+}
+
+.answer.correct {
+  background: #e7f5e9;
+  border-color: #55a563;
+}
+
+.answer.wrong {
+  background: #fae9e7;
+  border-color: #d86b60;
+}
+
+.feedback {
+  text-align: center;
+  min-height: 30px;
+  font-weight: bold;
+  margin: 15px;
+}
+
+.next {
+  text-align: center;
+}
+
+.result {
+  text-align: center;
+}
+
+.trophy {
+  font-size: 65px;
+}
+
+.resultbox {
+  background: #f5eee5;
+  border-radius: 15px;
+  padding: 18px;
+  margin: 20px auto;
+  max-width: 300px;
+  font-size: 18px;
+}
+
+.resultbox strong {
+  display: block;
+  font-size: 28px;
+  margin-top: 5px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 10px;
+}
+
+.spinner {
+  font-size: 40px;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media(max-width:560px) {
+
+  body {
+    padding: 0;
+  }
+
+  .app {
+    min-height: 100vh;
+    border-radius: 0;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  .answers {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
-<body>
-<div class="app">
-<header><div><h1>🎮 Mission : العربية</h1><p>Apprendre l'arabe en jouant</p></div><div class="badge" id="scoreBadge">⭐ 0</div></header>
-<main>
-<section id="loginScreen" class="screen active"><div class="center">
-<div class="arabic">مهمّة العربية</div><h2>Bienvenue ! 👋</h2>
-<p>Entre ton pseudo insta. Ton résultat sera enregistré automatiquement.</p>
-<input id="studentName" maxlength="80" autocomplete="name" placeholder="pseudo insta">
-<div id="loginError" class="error"></div><button class="primary" id="startBtn">🚀 Commencer le jeu</button>
-<div id="firebaseStatus" class="status">Connexion à Firebase…</div>
-</div></section>
 
-<section id="gameScreen" class="screen">
-<div class="stats"><div class="stat">Question<strong id="counter">1 / 10</strong></div><div class="stat">Vies<strong id="lives">❤️❤️❤️</strong></div><div class="stat">Score<strong id="score">0</strong></div></div>
-<div class="progress"><div class="bar" id="progressBar"></div></div>
-<div class="q"><img id="questionImage" alt="Illustration"><div class="question">ما هذا؟</div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="next"><button class="primary" id="nextBtn" style="display:none">Question suivante →</button></div></div>
+<body>
+
+<div class="app">
+
+<header>
+
+<div>
+<h1>🎮 Mission : العربية</h1>
+<p>Apprendre l'arabe en jouant</p>
+</div>
+
+<div class="badge" id="scoreBadge">
+⭐ 0
+</div>
+
+</header>
+
+
+<main>
+
+
+<!-- ÉCRAN CONNEXION -->
+
+<section id="loginScreen" class="screen active">
+
+<div class="center">
+
+<div class="arabic-title">
+مهمّة العربية
+</div>
+
+<h2>
+Bienvenue ! 👋
+</h2>
+
+<p>
+Entre ton nom et ton prénom pour commencer.
+Ton résultat sera enregistré automatiquement.
+</p>
+
+<input
+id="studentName"
+type="text"
+maxlength="80"
+autocomplete="name"
+placeholder="Nom et prénom"
+>
+
+<div id="loginError" class="error"></div>
+
+<button
+class="primary"
+id="startBtn"
+>
+🚀 Commencer le jeu
+</button>
+
+<div
+id="firebaseStatus"
+class="status"
+>
+Connexion à Firebase…
+</div>
+
+</div>
+
 </section>
 
-<section id="resultScreen" class="screen"><div class="center">
-<div class="trophy" id="trophy">🏆</div><h2 id="resultTitle">Bravo !</h2><p id="resultText"></p>
-<div class="resultbox">Score<strong id="finalScore">0 / 100</strong></div>
-<div id="saveStatus" class="status">Enregistrement du score…</div><button class="secondary" onclick="location.reload()">🔄 Rejouer</button>
-</div></section>
-</main></div>
+
+<!-- ÉCRAN CHARGEMENT -->
+
+<section id="loadingScreen" class="screen">
+
+<div class="loading">
+
+<div class="spinner">
+⏳
+</div>
+
+<h2>
+Chargement du jeu...
+</h2>
+
+<p>
+Récupération des questions.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ÉCRAN JEU -->
+
+<section id="gameScreen" class="screen">
+
+<div class="stats">
+
+<div class="stat">
+
+Question
+
+<strong id="counter">
+1 / 10
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+Vies
+
+<strong id="lives">
+❤️❤️❤️
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+Score
+
+<strong id="score">
+0
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="progress">
+
+<div
+class="bar"
+id="progressBar">
+</div>
+
+</div>
+
+
+<div class="q">
+
+<img
+id="questionImage"
+alt="Illustration"
+>
+
+
+<div
+class="question"
+id="questionText">
+ما هذا؟
+</div>
+
+
+<div
+class="answers"
+id="answers">
+</div>
+
+
+<div
+class="feedback"
+id="feedback">
+</div>
+
+
+<div class="next">
+
+<button
+class="primary"
+id="nextBtn"
+style="display:none"
+>
+Question suivante →
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ÉCRAN RÉSULTAT -->
+
+<section id="resultScreen" class="screen">
+
+<div class="center result">
+
+<div
+class="trophy"
+id="trophy">
+🏆
+</div>
+
+<h2 id="resultTitle">
+Bravo !
+</h2>
+
+<p id="resultText">
+</p>
+
+<div class="resultbox">
+
+Score
+
+<strong id="finalScore">
+0 / 100
+</strong>
+
+</div>
+
+<div
+id="saveStatus"
+class="status">
+Enregistrement du score…
+</div>
+
+<button
+class="secondary"
+onclick="location.reload()">
+🔄 Rejouer
+</button>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import{getAuth,signInAnonymously}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,addDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyCzcH48LRFuVqxryQsLDGX_JOAky7E2aOE",
-authDomain:"mission-arabia.firebaseapp.com",
-projectId:"mission-arabia",
-storageBucket:"mission-arabia.firebasestorage.app",
-messagingSenderId:"434432746016",
-appId:"1:434432746016:web:ea1641808436de258e5245",
-measurementId:"G-S0LDW67DPE"};
+/* =========================================================
+   FIREBASE
+========================================================= */
 
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
-let firebaseUser=null;
-const questions=[
-["كِتَاب","https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80",["كِتَاب","بَاب","بَيْت","مَاء"]],
-["بَيْت","https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80",["سَيَّارَة","بَيْت","مَدْرَسَة","قِطّ"]],
-["سَيَّارَة","https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80",["بَاب","قَهْوَة","سَيَّارَة","شَمْس"]],
-["مَاء","https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=600&q=80",["مَاء","خُبْز","كِتَاب","قِطّ"]],
-["خُبْز","https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",["مَدْرَسَة","خُبْز","مَاء","بَيْت"]],
-["قَهْوَة","https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",["قِطّ","قَهْوَة","شَمْس","بَاب"]],
-["مَدْرَسَة","https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80",["مَدْرَسَة","كِتَاب","سَيَّارَة","خُبْز"]],
-["قِطّ","https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80",["بَيْت","قِطّ","مَاء","قَهْوَة"]],
-["شَمْس","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80",["شَمْس","بَاب","مَدْرَسَة","كِتَاب"]],
-["بَاب","https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80",["خُبْز","بَاب","سَيَّارَة","بَيْت"]]
-];
-let student="",current=0,score=0,lives=3,correct=0,answered=false;
-const $=id=>document.getElementById(id);
-function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(id).classList.add("active")}
-async function initAuth(){try{const r=await signInAnonymously(auth);firebaseUser=r.user;$("firebaseStatus").textContent="✅ Connexion sécurisée prête.";$("firebaseStatus").style.color="#276431"}catch(e){console.error(e);$("firebaseStatus").textContent="⚠️ Active bien la connexion anonyme dans Firebase.";}}
-initAuth();
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-$("startBtn").onclick=()=>{student=$("studentName").value.trim();if(!student){$("loginError").textContent="Veuillez entrer votre nom et prénom.";return}if(!firebaseUser){$("loginError").textContent="La connexion Firebase n'est pas encore prête.";return}$("loginError").textContent="";current=0;score=0;lives=3;correct=0;show("gameScreen");render()};
-function render(){const q=questions[current];answered=false;$("counter").textContent=`${current+1} / ${questions.length}`;$("score").textContent=score;$("scoreBadge").textContent=`⭐ ${score}`;$("lives").textContent="❤️".repeat(lives)+"🖤".repeat(3-lives);$("progressBar").style.width=`${current/questions.length*100}%`;$("questionImage").src=q[1];$("feedback").textContent="";$("nextBtn").style.display="none";const a=$("answers");a.innerHTML="";[...q[2]].sort(()=>Math.random()-.5).forEach(o=>{const b=document.createElement("button");b.className="answer";b.textContent=o;b.onclick=()=>answer(b,o);a.appendChild(b)})}
-function answer(btn,ans){if(answered)return;answered=true;const q=questions[current];document.querySelectorAll(".answer").forEach(b=>b.disabled=true);if(ans===q[0]){btn.classList.add("correct");score+=10;correct++;$("feedback").textContent="✅ Bravo ! Bonne réponse.";$("feedback").style.color="#276431"}else{btn.classList.add("wrong");lives--;document.querySelectorAll(".answer").forEach(b=>{if(b.textContent===q[0])b.classList.add("correct")});$("feedback").textContent=`❌ La bonne réponse était : ${q[0]}`;$("feedback").style.color="#8b2f27"}$("score").textContent=score;$("scoreBadge").textContent=`⭐ ${score}`;$("lives").textContent="❤️".repeat(lives)+"🖤".repeat(3-lives);$("progressBar").style.width=`${(current+1)/questions.length*100}%`;$("nextBtn").style.display="inline-block"}
-$("nextBtn").onclick=()=>{if(current<questions.length-1&&lives>0){current++;render()}else finish()};
-async function finish(){show("resultScreen");$("finalScore").textContent=`${score} / 100`;$("resultText").textContent=`${student}, tu as obtenu ${correct} bonne(s) réponse(s) sur ${questions.length}.`;$("trophy").textContent=correct>=9?"🏆":correct>=7?"🥇":correct>=5?"🥈":"🌱";$("resultTitle").textContent=correct>=9?"Excellent !":correct>=7?"Très bien !":correct>=5?"Bon travail !":"Continue tes efforts !";await save()}
-async function save(){if(!firebaseUser){$("saveStatus").textContent="❌ Score non enregistré.";return}try{await addDoc(collection(db,"scores"),{studentName:student,score:score,correctAnswers:correct,totalQuestions:questions.length,game:"Mission : العربية — Vocabulaire 1",playerUid:firebaseUser.uid,createdAt:serverTimestamp()});$("saveStatus").textContent="✅ Score enregistré avec succès !";$("saveStatus").style.color="#276431"}catch(e){console.error(e);$("saveStatus").textContent="❌ Erreur Firestore : vérifie les règles de sécurité.";$("saveStatus").style.color="#8b2f27"}}
+import {
+  getAuth,
+  signInAnonymously
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyCzcH48LRFuVqxryQsLDGX_JOAky7E2aOE",
+
+  authDomain:
+  "mission-arabia.firebaseapp.com",
+
+  projectId:
+  "mission-arabia",
+
+  storageBucket:
+  "mission-arabia.firebasestorage.app",
+
+  messagingSenderId:
+  "434432746016",
+
+  appId:
+  "1:434432746016:web:ea1641808436de258e5245",
+
+  measurementId:
+  "G-S0LDW67DPE"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let firebaseUser = null;
+
+let questions = [];
+
+let gameQuestions = [];
+
+let studentName = "";
+
+let current = 0;
+
+let score = 0;
+
+let lives = 3;
+
+let correct = 0;
+
+let answered = false;
+
+
+/* =========================================================
+   OUTILS
+========================================================= */
+
+const $ = id =>
+document.getElementById(id);
+
+
+function showScreen(id) {
+
+  document
+  .querySelectorAll(".screen")
+  .forEach(screen =>
+    screen.classList.remove("active")
+  );
+
+  $(id).classList.add("active");
+}
+
+
+/* =========================================================
+   AUTHENTIFICATION ANONYME
+========================================================= */
+
+async function initializeFirebase() {
+
+  try {
+
+    const result =
+    await signInAnonymously(auth);
+
+    firebaseUser =
+    result.user;
+
+    $("firebaseStatus").textContent =
+    "✅ Connexion sécurisée prête.";
+
+    $("firebaseStatus").style.color =
+    "#276431";
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "Erreur Authentication :",
+      error
+    );
+
+    $("firebaseStatus").textContent =
+    "⚠️ Impossible de se connecter à Firebase.";
+
+    $("firebaseStatus").style.color =
+    "#8b2f27";
+
+  }
+
+}
+
+
+initializeFirebase();
+
+
+/* =========================================================
+   RÉCUPÉRER LES QUESTIONS FIRESTORE
+========================================================= */
+
+async function loadQuestions() {
+
+  try {
+
+    const snapshot =
+    await getDocs(
+      collection(db, "questions")
+    );
+
+
+    questions = [];
+
+
+    snapshot.forEach(doc => {
+
+      const data = doc.data();
+
+      questions.push({
+
+        id: doc.id,
+
+        word: data.word,
+
+        image: data.image,
+
+        options: data.options,
+
+        category: data.category,
+
+        level: data.level
+
+      });
+
+    });
+
+
+    console.log(
+      "Questions récupérées :",
+      questions
+    );
+
+
+    if(questions.length === 0) {
+
+      throw new Error(
+        "Aucune question trouvée."
+      );
+
+    }
+
+
+    return true;
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "Erreur récupération questions :",
+      error
+    );
+
+    $("loginError").textContent =
+    "Impossible de récupérer les questions depuis Firebase.";
+
+    showScreen("loginScreen");
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   MÉLANGER UN TABLEAU
+========================================================= */
+
+function shuffle(array) {
+
+  return array.sort(
+    () => Math.random() - 0.5
+  );
+
+}
+
+
+/* =========================================================
+   COMMENCER LE JEU
+========================================================= */
+
+$("startBtn").addEventListener(
+  "click",
+  startGame
+);
+
+
+async function startGame() {
+
+  studentName =
+  $("studentName").value.trim();
+
+
+  if(!studentName) {
+
+    $("loginError").textContent =
+    "Veuillez entrer votre nom et prénom.";
+
+    return;
+
+  }
+
+
+  if(!firebaseUser) {
+
+    $("loginError").textContent =
+    "La connexion Firebase n'est pas encore prête.";
+
+    return;
+
+  }
+
+
+  $("loginError").textContent = "";
+
+
+  showScreen(
+    "loadingScreen"
+  );
+
+
+  const loaded =
+  await loadQuestions();
+
+
+  if(!loaded) {
+
+    return;
+
+  }
+
+
+  /*
+     Si nous avons 10 questions ou plus :
+     → le jeu choisit 10 questions au hasard.
+
+     Si nous en avons moins :
+     → il utilise toutes les questions disponibles.
+  */
+
+  gameQuestions =
+  shuffle([...questions])
+  .slice(
+    0,
+    Math.min(10, questions.length)
+  );
+
+
+  current = 0;
+
+  score = 0;
+
+  lives = 3;
+
+  correct = 0;
+
+
+  showScreen(
+    "gameScreen"
+  );
+
+
+  renderQuestion();
+
+}
+
+
+/* =========================================================
+   AFFICHER UNE QUESTION
+========================================================= */
+
+function renderQuestion() {
+
+  const question =
+  gameQuestions[current];
+
+
+  answered = false;
+
+
+  $("counter").textContent =
+  `${current + 1} / ${gameQuestions.length}`;
+
+
+  $("score").textContent =
+  score;
+
+
+  $("scoreBadge").textContent =
+  `⭐ ${score}`;
+
+
+  $("lives").textContent =
+  "❤️".repeat(lives) +
+  "🖤".repeat(3 - lives);
+
+
+  $("progressBar").style.width =
+  `${current / gameQuestions.length * 100}%`;
+
+
+  $("questionImage").src =
+  question.image;
+
+
+  /*
+     Pour l'instant, la question affichée
+     est toujours "ما هذا؟".
+     Nous pourrons plus tard ajouter
+     un champ "question" dans Firestore.
+  */
+
+  $("questionText").textContent =
+  "ما هذا؟";
+
+
+  $("feedback").textContent = "";
+
+
+  $("nextBtn").style.display =
+  "none";
+
+
+  const answers =
+  $("answers");
+
+
+  answers.innerHTML = "";
+
+
+  /*
+     On mélange les réponses
+  */
+
+  const options =
+  shuffle([
+    ...question.options
+  ]);
+
+
+  options.forEach(option => {
+
+    const button =
+    document.createElement("button");
+
+
+    button.className =
+    "answer";
+
+
+    button.textContent =
+    option;
+
+
+    button.addEventListener(
+      "click",
+      () =>
+      checkAnswer(
+        button,
+        option
+      )
+    );
+
+
+    answers.appendChild(
+      button
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   VÉRIFIER LA RÉPONSE
+========================================================= */
+
+function checkAnswer(
+  button,
+  answer
+) {
+
+  if(answered) {
+
+    return;
+
+  }
+
+
+  answered = true;
+
+
+  const question =
+  gameQuestions[current];
+
+
+  document
+  .querySelectorAll(".answer")
+  .forEach(button =>
+    button.disabled = true
+  );
+
+
+  if(answer === question.word) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    score += 10;
+
+    correct++;
+
+
+    $("feedback").textContent =
+    "✅ Bravo ! Bonne réponse.";
+
+
+    $("feedback").style.color =
+    "#276431";
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    lives--;
+
+
+    document
+    .querySelectorAll(".answer")
+    .forEach(button => {
+
+      if(
+        button.textContent ===
+        question.word
+      ) {
+
+        button.classList.add(
+          "correct"
+        );
+
+      }
+
+    });
+
+
+    $("feedback").textContent =
+    `❌ La bonne réponse était : ${question.word}`;
+
+
+    $("feedback").style.color =
+    "#8b2f27";
+
+  }
+
+
+  $("score").textContent =
+  score;
+
+
+  $("scoreBadge").textContent =
+  `⭐ ${score}`;
+
+
+  $("lives").textContent =
+  "❤️".repeat(lives) +
+  "🖤".repeat(3 - lives);
+
+
+  $("progressBar").style.width =
+  `${(current + 1) /
+  gameQuestions.length * 100}%`;
+
+
+  $("nextBtn").style.display =
+  "inline-block";
+
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+$("nextBtn").addEventListener(
+  "click",
+  nextQuestion
+);
+
+
+function nextQuestion() {
+
+  if(
+    current <
+    gameQuestions.length - 1
+    &&
+    lives > 0
+  ) {
+
+    current++;
+
+    renderQuestion();
+
+  }
+
+  else {
+
+    finishGame();
+
+  }
+
+}
+
+
+/* =========================================================
+   FIN DU JEU
+========================================================= */
+
+async function finishGame() {
+
+  showScreen(
+    "resultScreen"
+  );
+
+
+  const total =
+  gameQuestions.length;
+
+
+  $("finalScore").textContent =
+  `${score} / ${total * 10}`;
+
+
+  $("resultText").textContent =
+  `${studentName}, tu as obtenu ${correct} bonne(s) réponse(s) sur ${total}.`;
+
+
+  if(correct >= total * 0.9) {
+
+    $("trophy").textContent =
+    "🏆";
+
+    $("resultTitle").textContent =
+    "Excellent !";
+
+  }
+
+  else if(correct >= total * 0.7) {
+
+    $("trophy").textContent =
+    "🥇";
+
+    $("resultTitle").textContent =
+    "Très bien !";
+
+  }
+
+  else if(correct >= total * 0.5) {
+
+    $("trophy").textContent =
+    "🥈";
+
+    $("resultTitle").textContent =
+    "Bon travail !";
+
+  }
+
+  else {
+
+    $("trophy").textContent =
+    "🌱";
+
+    $("resultTitle").textContent =
+    "Continue tes efforts !";
+
+  }
+
+
+  await saveScore();
+
+}
+
+
+/* =========================================================
+   ENREGISTRER LE SCORE
+========================================================= */
+
+async function saveScore() {
+
+  const status =
+  $("saveStatus");
+
+
+  if(!firebaseUser) {
+
+    status.textContent =
+    "❌ Aucun utilisateur Firebase connecté.";
+
+    status.style.color =
+    "#8b2f27";
+
+    return;
+
+  }
+
+
+  try {
+
+    await addDoc(
+      collection(db, "scores"),
+      {
+
+        studentName:
+        studentName,
+
+        score:
+        score,
+
+        correctAnswers:
+        correct,
+
+        totalQuestions:
+        gameQuestions.length,
+
+        game:
+        "Mission : العربية",
+
+        playerUid:
+        firebaseUser.uid,
+
+        createdAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    status.textContent =
+    "✅ Score enregistré avec succès !";
+
+
+    status.style.color =
+    "#276431";
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "Erreur Firestore :",
+      error
+    );
+
+
+    status.textContent =
+    "❌ Erreur Firestore : vérifie les règles de sécurité.";
+
+
+    status.style.color =
+    "#8b2f27";
+
+  }
+
+}
+
 </script>
+
 </body>
 </html>
