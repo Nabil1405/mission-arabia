@@ -141,7 +141,7 @@ input:focus {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 18px;
 }
@@ -179,12 +179,33 @@ input:focus {
   text-align: center;
 }
 
+/* IMAGE */
 .q img {
   width: min(280px, 80%);
   height: 190px;
   object-fit: cover;
   border-radius: 18px;
   background: #eee5da;
+}
+
+/* AUDIO */
+.audio-container {
+  background: #f5eee5;
+  border-radius: 18px;
+  padding: 22px;
+  margin: 10px auto 20px;
+  width: min(500px, 100%);
+}
+
+.audio-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #3f2b20;
+}
+
+audio {
+  width: 100%;
 }
 
 .question {
@@ -411,17 +432,6 @@ Question
 
 <div class="stat">
 
-Vies
-
-<strong id="lives">
-❤️❤️❤️
-</strong>
-
-</div>
-
-
-<div class="stat">
-
 Score
 
 <strong id="score">
@@ -445,10 +455,32 @@ id="progressBar">
 
 <div class="q">
 
+<!-- IMAGE -->
 <img
 id="questionImage"
 alt="Illustration"
+style="display:none;"
 >
+
+
+<!-- AUDIO -->
+<div
+id="audioContainer"
+class="audio-container"
+style="display:none;"
+>
+
+<div class="audio-title">
+🎧 Écoute et choisis la bonne réponse
+</div>
+
+<audio
+id="questionAudio"
+controls
+>
+</audio>
+
+</div>
 
 
 <div
@@ -611,8 +643,6 @@ let current = 0;
 
 let score = 0;
 
-let lives = 3;
-
 let correct = 0;
 
 let answered = false;
@@ -635,6 +665,7 @@ function showScreen(id) {
   );
 
   $(id).classList.add("active");
+
 }
 
 
@@ -708,7 +739,9 @@ async function loadQuestions() {
 
         word: data.word,
 
-        image: data.image,
+        image: data.image || "",
+
+        audio: data.audio || "",
 
         options: data.options,
 
@@ -828,11 +861,8 @@ async function startGame() {
 
 
   /*
-     Si nous avons 10 questions ou plus :
-     → le jeu choisit 10 questions au hasard.
-
-     Si nous en avons moins :
-     → il utilise toutes les questions disponibles.
+     Le jeu choisit 10 questions maximum
+     au hasard.
   */
 
   gameQuestions =
@@ -846,8 +876,6 @@ async function startGame() {
   current = 0;
 
   score = 0;
-
-  lives = 3;
 
   correct = 0;
 
@@ -887,25 +915,68 @@ function renderQuestion() {
   `⭐ ${score}`;
 
 
-  $("lives").textContent =
-  "❤️".repeat(lives) +
-  "🖤".repeat(3 - lives);
-
-
   $("progressBar").style.width =
   `${current / gameQuestions.length * 100}%`;
 
 
-  $("questionImage").src =
-  question.image;
+  /*
+     ARRÊTER ET CACHER L'AUDIO PRÉCÉDENT
+  */
+
+  const audio =
+  $("questionAudio");
+
+  audio.pause();
+
+  audio.currentTime = 0;
+
+  audio.removeAttribute("src");
+
+  audio.load();
 
 
   /*
-     Pour l'instant, la question affichée
-     est toujours "ما هذا؟".
-     Nous pourrons plus tard ajouter
-     un champ "question" dans Firestore.
+     AFFICHER AUDIO OU IMAGE
   */
+
+  if(question.audio) {
+
+    $("audioContainer").style.display =
+    "block";
+
+    $("questionImage").style.display =
+    "none";
+
+    audio.src =
+    question.audio;
+
+    audio.load();
+
+  }
+
+  else if(question.image) {
+
+    $("audioContainer").style.display =
+    "none";
+
+    $("questionImage").style.display =
+    "block";
+
+    $("questionImage").src =
+    question.image;
+
+  }
+
+  else {
+
+    $("audioContainer").style.display =
+    "none";
+
+    $("questionImage").style.display =
+    "none";
+
+  }
+
 
   $("questionText").textContent =
   "ما هذا؟";
@@ -926,7 +997,7 @@ function renderQuestion() {
 
 
   /*
-     On mélange les réponses
+     Mélanger les réponses
   */
 
   const options =
@@ -1017,6 +1088,44 @@ function checkAnswer(
     $("feedback").style.color =
     "#276431";
 
+
+    $("score").textContent =
+    score;
+
+
+    $("scoreBadge").textContent =
+    `⭐ ${score}`;
+
+
+    $("progressBar").style.width =
+    `${(current + 1) /
+    gameQuestions.length * 100}%`;
+
+
+    /*
+       Si c'est la dernière question,
+       terminer directement.
+    */
+
+    if(
+      current ===
+      gameQuestions.length - 1
+    ) {
+
+      setTimeout(
+        finishGame,
+        800
+      );
+
+    }
+
+    else {
+
+      $("nextBtn").style.display =
+      "inline-block";
+
+    }
+
   }
 
   else {
@@ -1026,8 +1135,9 @@ function checkAnswer(
     );
 
 
-    lives--;
-
+    /*
+       Afficher la bonne réponse
+    */
 
     document
     .querySelectorAll(".answer")
@@ -1048,35 +1158,23 @@ function checkAnswer(
 
 
     $("feedback").textContent =
-    `❌ La bonne réponse était : ${question.word}`;
+    `❌ Mauvaise réponse ! La bonne réponse était : ${question.word}`;
 
 
     $("feedback").style.color =
     "#8b2f27";
 
+
+    /*
+       UNE SEULE ERREUR = FIN DU JEU
+    */
+
+    setTimeout(
+      finishGame,
+      1200
+    );
+
   }
-
-
-  $("score").textContent =
-  score;
-
-
-  $("scoreBadge").textContent =
-  `⭐ ${score}`;
-
-
-  $("lives").textContent =
-  "❤️".repeat(lives) +
-  "🖤".repeat(3 - lives);
-
-
-  $("progressBar").style.width =
-  `${(current + 1) /
-  gameQuestions.length * 100}%`;
-
-
-  $("nextBtn").style.display =
-  "inline-block";
 
 }
 
@@ -1096,8 +1194,6 @@ function nextQuestion() {
   if(
     current <
     gameQuestions.length - 1
-    &&
-    lives > 0
   ) {
 
     current++;
@@ -1120,6 +1216,16 @@ function nextQuestion() {
 ========================================================= */
 
 async function finishGame() {
+
+  /*
+     Arrêter l'audio lorsque le jeu se termine
+  */
+
+  const audio =
+  $("questionAudio");
+
+  audio.pause();
+
 
   showScreen(
     "resultScreen"
@@ -1239,7 +1345,7 @@ async function saveScore() {
 
 
     status.textContent =
-    "✅ Score enregistré avec succès !";
+    "✅ Score enregistré avec succès!";
 
 
     status.style.color =
