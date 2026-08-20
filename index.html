@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mission : العربية — Jeu d'apprentissage</title>
+<title>Mission : العربي — Jeu d'apprentissage</title>
 
 <style>
 * {
@@ -28,13 +28,15 @@ body {
   box-shadow: 0 18px 50px rgba(55,38,25,.15);
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header {
   background: #3f2b20;
   color: white;
   padding: 22px 26px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
 }
 
 header h1 {
@@ -44,16 +46,15 @@ header h1 {
 
 header p {
   margin: 5px 0 0;
-  opacity: .8;
-  font-size: 13px;
-}
-
-.badge {
-  background: #ffffff18;
-  padding: 10px 14px;
-  border-radius: 12px;
+  color: #f1d59f;
+  opacity: 1;
+  font-size: 14px;
   font-weight: bold;
 }
+
+/* =========================
+   CONTENU
+========================= */
 
 main {
   padding: 28px;
@@ -77,7 +78,7 @@ main {
   direction: rtl;
   color: #3f2b20;
   font-weight: bold;
-  margin: 10px;
+  margin: 10px 10px 0;
 }
 
 h2 {
@@ -102,6 +103,10 @@ input {
 input:focus {
   border-color: #8b5e3c;
 }
+
+/* =========================
+   BOUTONS
+========================= */
 
 .primary,
 .secondary {
@@ -182,6 +187,7 @@ input:focus {
 }
 
 @keyframes pulse {
+
   0% {
     transform: scale(1);
   }
@@ -193,6 +199,7 @@ input:focus {
   100% {
     transform: scale(1);
   }
+
 }
 
 /* =========================
@@ -260,7 +267,7 @@ audio {
 }
 
 /* =========================
-   TEXTE QUESTION
+   QUESTION TEXTE
 ========================= */
 
 .question {
@@ -361,6 +368,7 @@ audio {
 }
 
 @keyframes spin {
+
   from {
     transform: rotate(0deg);
   }
@@ -368,6 +376,7 @@ audio {
   to {
     transform: rotate(360deg);
   }
+
 }
 
 @media(max-width:560px) {
@@ -388,6 +397,7 @@ audio {
   .answers {
     grid-template-columns: 1fr;
   }
+
 }
 </style>
 </head>
@@ -398,14 +408,13 @@ audio {
 
 <header>
 
-<div>
-<h1>🎮 Mission : العربية</h1>
-<p>Apprendre l'arabe en jouant</p>
-</div>
+<h1>
+🎮 Mission : العربي
+</h1>
 
-<div class="badge" id="scoreBadge">
-⏱️ 10
-</div>
+<p>
+Apprendre l'arabe en jouant
+</p>
 
 </header>
 
@@ -425,7 +434,7 @@ audio {
 مهمّة العربية
 </div>
 
-<h2>
+<h2 style="margin-top: 0;">
 Bienvenue ! 👋
 </h2>
 
@@ -501,7 +510,7 @@ Récupération des questions.
 Question
 
 <strong id="counter">
-1 / 10
+1 / 28
 </strong>
 
 </div>
@@ -635,7 +644,7 @@ Bravo !
 Bonnes réponses
 
 <strong id="finalScore">
-0
+0 / 28
 </strong>
 
 </div>
@@ -958,14 +967,15 @@ async function startGame() {
 
 
   /*
-     Choisir 10 questions maximum
+     Le jeu utilise maintenant
+     jusqu'à 28 questions.
   */
 
   gameQuestions =
   shuffle([...questions])
   .slice(
     0,
-    Math.min(10, questions.length)
+    Math.min(28, questions.length)
   );
 
 
@@ -1076,10 +1086,6 @@ function updateTimerDisplay() {
 
   }
 
-
-  $("scoreBadge").textContent =
-  `⏱️ ${timeLeft}`;
-
 }
 
 
@@ -1139,10 +1145,6 @@ function timeOut() {
   $("feedback").style.color =
   "#8b2f27";
 
-
-  /*
-     Le joueur perd après 1,2 seconde
-  */
 
   setTimeout(
     finishGame,
@@ -1363,7 +1365,7 @@ function checkAnswer(
 
 
     /*
-       Dernière question
+       DERNIÈRE QUESTION
     */
 
     if(
@@ -1506,8 +1508,12 @@ async function finishGame() {
   `${correct} / ${total}`;
 
 
+  /*
+     Message final sans le prénom
+  */
+
   $("resultText").textContent =
-  `${studentName}, tu as obtenu ${correct} bonne(s) réponse(s) sur ${total}.`;
+  `Vous avez obtenu ${correct} bonne(s) réponse(s) sur ${total}.`;
 
 
   /*
@@ -1550,7 +1556,7 @@ async function finishGame() {
     "🌱";
 
     $("resultTitle").textContent =
-    "Continue tes efforts !";
+    "Continuez vos efforts !";
 
   }
 
@@ -1599,7 +1605,7 @@ async function saveScore() {
         gameQuestions.length,
 
         game:
-        "Mission : العربية",
+        "Mission : العربي",
 
         playerUid:
         firebaseUser.uid,
