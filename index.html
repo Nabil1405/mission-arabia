@@ -6,17 +6,23 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>Mission : العربي — Jeu d'apprentissage</title>
 
+
 <style>
+
+/* =========================================================
+   BASE
+========================================================= */
 
 * {
   box-sizing: border-box;
 }
+
 
 body {
 
@@ -42,12 +48,17 @@ body {
 }
 
 
+/* =========================================================
+   APPLICATION
+========================================================= */
+
 .app {
 
   width:
     min(800px, 100%);
 
-  margin: auto;
+  margin:
+    auto;
 
   background:
     #fffdf9;
@@ -83,19 +94,24 @@ header {
     center;
 }
 
+
 header h1 {
 
   margin:
     0;
 
   font-size:
-    24px;
+    25px;
+
+  font-weight:
+    700;
 }
+
 
 header p {
 
   margin:
-    5px 0 0;
+    6px 0 0;
 
   color:
     #f1d59f;
@@ -143,24 +159,109 @@ main {
 }
 
 
-.arabic-title {
+/* =========================================================
+   TITRE ARABE
+========================================================= */
 
-  font-size:
-    clamp(45px, 10vw, 70px);
+.arabic-title {
 
   direction:
     rtl;
+
+  font-size:
+    clamp(48px, 11vw, 76px);
+
+  font-weight:
+    800;
+
+  color:
+    #3f2b20;
+
+  line-height:
+    1.1;
+
+  margin:
+    5px 0 8px;
+
+  letter-spacing:
+    1px;
+
+  text-shadow:
+    0 3px 8px
+    rgba(63,43,32,.12);
+}
+
+
+.arabic-title::after {
+
+  content:
+    "";
+
+  display:
+    block;
+
+  width:
+    70px;
+
+  height:
+    4px;
+
+  margin:
+    12px auto 0;
+
+  border-radius:
+    20px;
+
+  background:
+    #c59b5f;
+}
+
+
+/* =========================================================
+   BIENVENUE
+========================================================= */
+
+.welcome-title {
+
+  font-size:
+    clamp(28px, 6vw, 36px);
 
   color:
     #3f2b20;
 
   font-weight:
-    bold;
+    700;
 
   margin:
-    10px 10px 0;
+    10px 0 6px;
+
+  letter-spacing:
+    -0.5px;
 }
 
+
+.welcome-description {
+
+  max-width:
+    520px;
+
+  margin:
+    0 auto 20px;
+
+  font-size:
+    15px;
+
+  line-height:
+    1.7;
+
+  color:
+    #7a6758;
+}
+
+
+/* =========================================================
+   TEXTES
+========================================================= */
 
 h2 {
 
@@ -216,7 +317,7 @@ input:focus {
 
 
 /* =========================================================
-   BUTTONS
+   BOUTONS
 ========================================================= */
 
 .primary,
@@ -249,6 +350,9 @@ input:focus {
 
   color:
     white;
+
+  transition:
+    .2s;
 }
 
 
@@ -256,6 +360,9 @@ input:focus {
 
   background:
     #744c30;
+
+  transform:
+    translateY(-1px);
 }
 
 
@@ -268,6 +375,10 @@ input:focus {
     #3f2b20;
 }
 
+
+/* =========================================================
+   ERREURS
+========================================================= */
 
 .error {
 
@@ -296,7 +407,7 @@ input:focus {
 
 
 /* =========================================================
-   STATS
+   STATISTIQUES
 ========================================================= */
 
 .stats {
@@ -395,7 +506,7 @@ input:focus {
 
 
 /* =========================================================
-   PROGRESS
+   PROGRESSION
 ========================================================= */
 
 .progress {
@@ -474,7 +585,7 @@ input:focus {
 
 
 /* =========================================================
-   QUESTION AUDIO
+   AUDIO QUESTION
 ========================================================= */
 
 .audio-container {
@@ -520,7 +631,7 @@ input:focus {
 
 
 /* =========================================================
-   QUESTION TEXT
+   TEXTE QUESTION
 ========================================================= */
 
 .question {
@@ -540,7 +651,7 @@ input:focus {
 
 
 /* =========================================================
-   ANSWERS
+   RÉPONSES
 ========================================================= */
 
 .answers {
@@ -578,6 +689,9 @@ input:focus {
 
   direction:
     rtl;
+
+  transition:
+    .15s;
 }
 
 
@@ -585,6 +699,9 @@ input:focus {
 
   border-color:
     #8b5e3c;
+
+  transform:
+    translateY(-1px);
 }
 
 
@@ -638,6 +755,10 @@ input:focus {
 }
 
 
+/* =========================================================
+   NEXT
+========================================================= */
+
 .next {
 
   text-align:
@@ -646,7 +767,7 @@ input:focus {
 
 
 /* =========================================================
-   RESULT
+   RÉSULTAT
 ========================================================= */
 
 .result {
@@ -699,7 +820,7 @@ input:focus {
 
 
 /* =========================================================
-   LOADING
+   CHARGEMENT
 ========================================================= */
 
 .loading {
@@ -725,14 +846,19 @@ input:focus {
 @keyframes spin {
 
   from {
+
     transform:
       rotate(0deg);
+
   }
 
   to {
+
     transform:
       rotate(360deg);
+
   }
+
 }
 
 
@@ -743,9 +869,12 @@ input:focus {
 @media(max-width:560px) {
 
   body {
+
     padding:
       0;
+
   }
+
 
   .app {
 
@@ -754,18 +883,31 @@ input:focus {
 
     border-radius:
       0;
+
   }
+
 
   main {
 
     padding:
       20px;
+
   }
+
 
   .answers {
 
     grid-template-columns:
       1fr;
+
+  }
+
+
+  .arabic-title {
+
+    font-size:
+      52px;
+
   }
 
 }
@@ -802,7 +944,7 @@ Apprendre l'arabe en jouant
 
 
 <!-- =====================================================
-     LOGIN
+     ÉCRAN CONNEXION
 ===================================================== -->
 
 <section
@@ -818,14 +960,14 @@ class="screen active"
 </div>
 
 
-<h2 style="margin-top:0;">
+<h2 class="welcome-title">
 Bienvenue ! 👋
 </h2>
 
 
-<p>
-Entre ton nom et ton prénom pour commencer.
-Ton résultat sera enregistré automatiquement.
+<p class="welcome-description">
+Entrez votre nom et prénom pour commencer votre mission.<br>
+Votre résultat sera enregistré automatiquement.
 </p>
 
 
@@ -866,7 +1008,7 @@ Connexion à Firebase…
 
 
 <!-- =====================================================
-     LOADING
+     ÉCRAN CHARGEMENT
 ===================================================== -->
 
 <section
@@ -894,7 +1036,7 @@ Récupération des questions.
 
 
 <!-- =====================================================
-     GAME
+     ÉCRAN JEU
 ===================================================== -->
 
 <section
@@ -911,7 +1053,7 @@ class="screen"
 Question
 
 <strong id="counter">
-📝 1 / 28
+1 / 28
 </strong>
 
 </div>
@@ -925,7 +1067,7 @@ Temps
 id="timer"
 class="timer"
 >
-⏱️ 10
+10
 </strong>
 
 </div>
@@ -956,7 +1098,7 @@ style="display:none;"
 >
 
 
-<!-- AUDIO QUESTION -->
+<!-- AUDIO -->
 
 <div
 id="audioContainer"
@@ -965,7 +1107,7 @@ style="display:none;"
 >
 
 <div class="audio-title">
-🎧 Écoute et choisis la bonne réponse
+🎧 Écoutez et choisissez la bonne réponse
 </div>
 
 <audio
@@ -987,12 +1129,11 @@ id="questionText"
 </div>
 
 
-<!-- ANSWERS -->
+<!-- RÉPONSES -->
 
 <div
 class="answers"
-id="answers"
->
+id="answers">
 </div>
 
 
@@ -1023,7 +1164,7 @@ Question suivante →
 
 
 <!-- =====================================================
-     RESULT
+     ÉCRAN RÉSULTAT
 ===================================================== -->
 
 <section
@@ -1087,7 +1228,7 @@ onclick="location.reload()"
 
 
 <!-- =====================================================
-     BUZZERS
+     BUZZERS GITHUB
 ===================================================== -->
 
 <audio
@@ -1100,7 +1241,7 @@ src="audio/correct.mp3">
 <audio
 id="wrongBuzzer"
 preload="auto"
-src="audio/wrongg.mp3">
+src="audio/wrong.mp3">
 </audio>
 
 
@@ -1201,7 +1342,7 @@ let timeLeft = 10;
 
 
 /* =========================================================
-   OUTIL $
+   OUTIL
 ========================================================= */
 
 const $ = id =>
@@ -1215,14 +1356,10 @@ document.getElementById(id);
 const correctBuzzer =
 $("correctBuzzer");
 
+
 const wrongBuzzer =
 $("wrongBuzzer");
 
-
-/*
-   On force le navigateur à charger
-   les fichiers audio depuis GitHub.
-*/
 
 correctBuzzer.load();
 
@@ -1230,7 +1367,7 @@ wrongBuzzer.load();
 
 
 /* =========================================================
-   JOUER CORRECT BUZZER
+   CORRECT BUZZER
 ========================================================= */
 
 function playCorrectBuzzer() {
@@ -1243,16 +1380,20 @@ function playCorrectBuzzer() {
   correctBuzzer.play();
 
 
-  if(promise !== undefined) {
+  if(
+    promise !== undefined
+  ) {
 
-    promise.catch(error => {
+    promise.catch(
+      error => {
 
-      console.error(
-        "Erreur correct buzzer :",
-        error
-      );
+        console.error(
+          "Erreur correct buzzer :",
+          error
+        );
 
-    });
+      }
+    );
 
   }
 
@@ -1260,7 +1401,7 @@ function playCorrectBuzzer() {
 
 
 /* =========================================================
-   JOUER WRONG BUZZER
+   WRONG BUZZER
 ========================================================= */
 
 function playWrongBuzzer() {
@@ -1273,16 +1414,20 @@ function playWrongBuzzer() {
   wrongBuzzer.play();
 
 
-  if(promise !== undefined) {
+  if(
+    promise !== undefined
+  ) {
 
-    promise.catch(error => {
+    promise.catch(
+      error => {
 
-      console.error(
-        "Erreur wrong buzzer :",
-        error
-      );
+        console.error(
+          "Erreur wrong buzzer :",
+          error
+        );
 
-    });
+      }
+    );
 
   }
 
@@ -1290,20 +1435,19 @@ function playWrongBuzzer() {
 
 
 /* =========================================================
-   SCREEN
+   ÉCRANS
 ========================================================= */
 
 function showScreen(id) {
 
   document
   .querySelectorAll(".screen")
-  .forEach(screen => {
-
+  .forEach(
+    screen =>
     screen.classList.remove(
       "active"
-    );
-
-  });
+    )
+  );
 
 
   $(id).classList.add(
@@ -1314,7 +1458,7 @@ function showScreen(id) {
 
 
 /* =========================================================
-   FIREBASE AUTH
+   AUTHENTIFICATION
 ========================================================= */
 
 async function initializeFirebase() {
@@ -1337,8 +1481,7 @@ async function initializeFirebase() {
 
 
     $("firebaseStatus")
-    .style
-    .color =
+    .style.color =
     "#276431";
 
   }
@@ -1357,8 +1500,7 @@ async function initializeFirebase() {
 
 
     $("firebaseStatus")
-    .style
-    .color =
+    .style.color =
     "#8b2f27";
 
   }
@@ -1370,7 +1512,7 @@ initializeFirebase();
 
 
 /* =========================================================
-   LOAD QUESTIONS
+   QUESTIONS FIRESTORE
 ========================================================= */
 
 async function loadQuestions() {
@@ -1389,38 +1531,40 @@ async function loadQuestions() {
     questions = [];
 
 
-    snapshot.forEach(doc => {
+    snapshot.forEach(
+      doc => {
 
-      const data =
-      doc.data();
+        const data =
+        doc.data();
 
 
-      questions.push({
+        questions.push({
 
-        id:
-        doc.id,
+          id:
+          doc.id,
 
-        word:
-        data.word,
+          word:
+          data.word,
 
-        image:
-        data.image || "",
+          image:
+          data.image || "",
 
-        audio:
-        data.audio || "",
+          audio:
+          data.audio || "",
 
-        options:
-        data.options,
+          options:
+          data.options,
 
-        category:
-        data.category,
+          category:
+          data.category,
 
-        level:
-        data.level
+          level:
+          data.level
 
-      });
+        });
 
-    });
+      }
+    );
 
 
     console.log(
@@ -1470,21 +1614,21 @@ async function loadQuestions() {
 
 
 /* =========================================================
-   SHUFFLE
+   MÉLANGE
 ========================================================= */
 
 function shuffle(array) {
 
   return array.sort(
     () =>
-      Math.random() - 0.5
+    Math.random() - 0.5
   );
 
 }
 
 
 /* =========================================================
-   START GAME
+   COMMENCER
 ========================================================= */
 
 $("startBtn")
@@ -1502,7 +1646,9 @@ async function startGame() {
   .trim();
 
 
-  if(!studentName) {
+  if(
+    !studentName
+  ) {
 
     $("loginError")
     .textContent =
@@ -1513,7 +1659,9 @@ async function startGame() {
   }
 
 
-  if(!firebaseUser) {
+  if(
+    !firebaseUser
+  ) {
 
     $("loginError")
     .textContent =
@@ -1538,16 +1686,14 @@ async function startGame() {
   await loadQuestions();
 
 
-  if(!loaded) {
+  if(
+    !loaded
+  ) {
 
     return;
 
   }
 
-
-  /*
-     Maximum 28 questions.
-  */
 
   gameQuestions =
   shuffle([
@@ -1597,32 +1743,35 @@ function startTimer() {
 
 
   timerInterval =
-  setInterval(() => {
+  setInterval(
+    () => {
 
-    timeLeft--;
-
-
-    updateTimer();
+      timeLeft--;
 
 
-    if(
-      timeLeft <= 0
-    ) {
-
-      stopTimer();
+      updateTimer();
 
 
-      timeOut();
+      if(
+        timeLeft <= 0
+      ) {
 
-    }
+        stopTimer();
 
-  }, 1000);
+
+        timeOut();
+
+      }
+
+    },
+    1000
+  );
 
 }
 
 
 /* =========================================================
-   STOP TIMER
+   ARRÊTER TIMER
 ========================================================= */
 
 function stopTimer() {
@@ -1645,7 +1794,7 @@ function stopTimer() {
 
 
 /* =========================================================
-   UPDATE TIMER
+   AFFICHER TIMER
 ========================================================= */
 
 function updateTimer() {
@@ -1655,7 +1804,7 @@ function updateTimer() {
 
 
   timer.textContent =
-  `⏱️ ${timeLeft}`;
+  timeLeft;
 
 
   timer.classList.remove(
@@ -1688,12 +1837,14 @@ function updateTimer() {
 
 
 /* =========================================================
-   TIME OUT
+   TEMPS ÉCOULÉ
 ========================================================= */
 
 function timeOut() {
 
-  if(answered) {
+  if(
+    answered
+  ) {
 
     return;
 
@@ -1708,43 +1859,39 @@ function timeOut() {
   gameQuestions[current];
 
 
-  /*
-     🔊 WRONG BUZZER
-  */
-
   playWrongBuzzer();
 
 
   document
   .querySelectorAll(".answer")
-  .forEach(button => {
+  .forEach(
+    button => {
 
-    button.disabled =
-    true;
+      button.disabled =
+      true;
 
-  });
+    }
+  );
 
-
-  /*
-     Montrer bonne réponse
-  */
 
   document
   .querySelectorAll(".answer")
-  .forEach(button => {
+  .forEach(
+    button => {
 
-    if(
-      button.textContent ===
-      question.word
-    ) {
+      if(
+        button.textContent ===
+        question.word
+      ) {
 
-      button.classList.add(
-        "correct"
-      );
+        button.classList.add(
+          "correct"
+        );
+
+      }
 
     }
-
-  });
+  );
 
 
   $("feedback")
@@ -1753,8 +1900,7 @@ function timeOut() {
 
 
   $("feedback")
-  .style
-  .color =
+  .style.color =
   "#8b2f27";
 
 
@@ -1767,7 +1913,7 @@ function timeOut() {
 
 
 /* =========================================================
-   RENDER QUESTION
+   AFFICHER QUESTION
 ========================================================= */
 
 function renderQuestion() {
@@ -1782,20 +1928,17 @@ function renderQuestion() {
 
   $("counter")
   .textContent =
-  `📝 ${current + 1} / ${gameQuestions.length}`;
+  `${current + 1} / ${gameQuestions.length}`;
 
 
   $("progressBar")
-  .style
-  .width =
+  .style.width =
   `${current /
   gameQuestions.length *
   100}%`;
 
 
-  /*
-     Arrêter l'audio précédent
-  */
+  /* AUDIO QUESTION */
 
   const questionAudio =
   $("questionAudio");
@@ -1816,23 +1959,19 @@ function renderQuestion() {
   questionAudio.load();
 
 
-  /*
-     AUDIO OU IMAGE
-  */
+  /* AUDIO OU IMAGE */
 
   if(
     question.audio
   ) {
 
     $("audioContainer")
-    .style
-    .display =
+    .style.display =
     "block";
 
 
     $("questionImage")
-    .style
-    .display =
+    .style.display =
     "none";
 
 
@@ -1849,14 +1988,12 @@ function renderQuestion() {
   ) {
 
     $("audioContainer")
-    .style
-    .display =
+    .style.display =
     "none";
 
 
     $("questionImage")
-    .style
-    .display =
+    .style.display =
     "block";
 
 
@@ -1869,14 +2006,12 @@ function renderQuestion() {
   else {
 
     $("audioContainer")
-    .style
-    .display =
+    .style.display =
     "none";
 
 
     $("questionImage")
-    .style
-    .display =
+    .style.display =
     "none";
 
   }
@@ -1893,14 +2028,9 @@ function renderQuestion() {
 
 
   $("nextBtn")
-  .style
-  .display =
+  .style.display =
   "none";
 
-
-  /*
-     Réponses
-  */
 
   const answers =
   $("answers");
@@ -1951,17 +2081,13 @@ function renderQuestion() {
   );
 
 
-  /*
-     Démarrer timer
-  */
-
   startTimer();
 
 }
 
 
 /* =========================================================
-   CHECK ANSWER
+   VÉRIFIER RÉPONSE
 ========================================================= */
 
 function checkAnswer(
@@ -1969,7 +2095,9 @@ function checkAnswer(
   answer
 ) {
 
-  if(answered) {
+  if(
+    answered
+  ) {
 
     return;
 
@@ -1989,17 +2117,17 @@ function checkAnswer(
 
   document
   .querySelectorAll(".answer")
-  .forEach(button => {
+  .forEach(
+    button => {
 
-    button.disabled =
-    true;
+      button.disabled =
+      true;
 
-  });
+    }
+  );
 
 
-  /*
-     CORRECT
-  */
+  /* BONNE RÉPONSE */
 
   if(
     answer ===
@@ -2014,10 +2142,6 @@ function checkAnswer(
     correct++;
 
 
-    /*
-       🔊 CORRECT BUZZER
-    */
-
     playCorrectBuzzer();
 
 
@@ -2027,22 +2151,16 @@ function checkAnswer(
 
 
     $("feedback")
-    .style
-    .color =
+    .style.color =
     "#276431";
 
 
     $("progressBar")
-    .style
-    .width =
+    .style.width =
     `${(current + 1) /
     gameQuestions.length *
     100}%`;
 
-
-    /*
-       Dernière question
-    */
 
     if(
       current ===
@@ -2059,8 +2177,7 @@ function checkAnswer(
     else {
 
       $("nextBtn")
-      .style
-      .display =
+      .style.display =
       "inline-block";
 
     }
@@ -2068,9 +2185,7 @@ function checkAnswer(
   }
 
 
-  /*
-     WRONG
-  */
+  /* MAUVAISE RÉPONSE */
 
   else {
 
@@ -2079,33 +2194,27 @@ function checkAnswer(
     );
 
 
-    /*
-       🔊 WRONG BUZZER
-    */
-
     playWrongBuzzer();
 
 
-    /*
-       Montrer bonne réponse
-    */
-
     document
     .querySelectorAll(".answer")
-    .forEach(button => {
+    .forEach(
+      button => {
 
-      if(
-        button.textContent ===
-        question.word
-      ) {
+        if(
+          button.textContent ===
+          question.word
+        ) {
 
-        button.classList.add(
-          "correct"
-        );
+          button.classList.add(
+            "correct"
+          );
+
+        }
 
       }
-
-    });
+    );
 
 
     $("feedback")
@@ -2114,14 +2223,9 @@ function checkAnswer(
 
 
     $("feedback")
-    .style
-    .color =
+    .style.color =
     "#8b2f27";
 
-
-    /*
-       FIN
-    */
 
     setTimeout(
       finishGame,
@@ -2134,7 +2238,7 @@ function checkAnswer(
 
 
 /* =========================================================
-   NEXT QUESTION
+   QUESTION SUIVANTE
 ========================================================= */
 
 $("nextBtn")
@@ -2176,17 +2280,9 @@ async function finishGame() {
   stopTimer();
 
 
-  /*
-     Arrêter audio question
-  */
-
   $("questionAudio")
   .pause();
 
-
-  /*
-     Résultat
-  */
 
   showScreen(
     "resultScreen"
@@ -2207,12 +2303,11 @@ async function finishGame() {
   `Vous avez obtenu ${correct} bonne(s) réponse(s) sur ${total}.`;
 
 
-  /*
-     TROPHÉE
-  */
+  /* RÉSULTAT */
 
   if(
-    correct === total
+    correct ===
+    total
   ) {
 
     $("trophy")
@@ -2278,7 +2373,7 @@ async function finishGame() {
 
 
 /* =========================================================
-   SAVE SCORE
+   ENREGISTRER RÉSULTAT
 ========================================================= */
 
 async function saveScore() {
@@ -2287,7 +2382,9 @@ async function saveScore() {
   $("saveStatus");
 
 
-  if(!firebaseUser) {
+  if(
+    !firebaseUser
+  ) {
 
     status.textContent =
     "❌ Aucun utilisateur Firebase connecté.";
