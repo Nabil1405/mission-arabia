@@ -956,7 +956,7 @@ class="screen active"
 
 
 <div class="arabic-title">
-مَرْحَبًا !
+مَرْحَبًا !    
 </div>
 
 
@@ -1050,7 +1050,7 @@ class="screen"
 
 <div class="stat">
 
-Question
+📝 Question
 
 <strong id="counter">
 1 / 28
@@ -1061,7 +1061,7 @@ Question
 
 <div class="stat">
 
-Temps
+⏱️ Temps
 
 <strong
 id="timer"
@@ -1938,8 +1938,6 @@ function renderQuestion() {
   100}%`;
 
 
-  /* AUDIO QUESTION */
-
   const questionAudio =
   $("questionAudio");
 
@@ -2302,8 +2300,6 @@ async function finishGame() {
   .textContent =
   `Vous avez obtenu ${correct} bonne(s) réponse(s) sur ${total}.`;
 
-
-  /* RÉSULTAT */
 
   if(
     correct ===
