@@ -1103,7 +1103,18 @@ preload="auto"
 src="audio/wrong.mp3">
 </audio>
 
-
+<button
+  onclick="document.getElementById('correctBuzzer').play()"
+  style="
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    z-index:9999;
+  "
+>
+🔊 TEST BUZZER
+</button>
+  
 <script type="module">
 
 
@@ -1218,6 +1229,15 @@ $("correctBuzzer");
 const wrongBuzzer =
 $("wrongBuzzer");
 
+  console.log(
+  "Correct buzzer URL :",
+  correctBuzzer.src
+);
+
+console.log(
+  "Wrong buzzer URL :",
+  wrongBuzzer.src
+);
 
 /*
    On force le navigateur à charger
