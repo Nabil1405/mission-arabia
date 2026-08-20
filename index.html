@@ -10,7 +10,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0"
 >
 
-<title>Quiz : الحُرُوف — Jeu d'apprentissage</title>
+<title>Mission : العربي — Jeu d'apprentissage</title>
 
 <style>
 
@@ -788,11 +788,11 @@ input:focus {
 <header>
 
 <h1>
-​🧑‍🏫 Quiz : الحُرُوف
+🎮 Mission : العربي
 </h1>
 
 <p>
-Réviser l'arabe en jouant
+Apprendre l'arabe en jouant
 </p>
 
 </header>
@@ -814,7 +814,7 @@ class="screen active"
 
 
 <div class="arabic-title">
-مَرْحَبًا ! 
+مهمّة العربية
 </div>
 
 
@@ -922,15 +922,6 @@ Question
 Temps
 
 <strong
-id="timer"
-class="timer"
->
-10
-</strong>
-
-</div>
-
-</div>
 id="timer"
 class="timer"
 >
@@ -1112,7 +1103,7 @@ preload="auto"
 src="audio/wrongg.mp3">
 </audio>
 
-  
+
 <script type="module">
 
 
@@ -1227,6 +1218,7 @@ $("correctBuzzer");
 const wrongBuzzer =
 $("wrongBuzzer");
 
+
   console.log(
   "Correct buzzer URL :",
   correctBuzzer.src
@@ -1237,6 +1229,7 @@ console.log(
   wrongBuzzer.src
 );
 
+  
 /*
    On force le navigateur à charger
    les fichiers audio depuis GitHub.
