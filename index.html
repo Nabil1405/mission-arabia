@@ -911,7 +911,7 @@ class="screen"
 Question
 
 <strong id="counter">
-1 / 28
+📝 1 / 28
 </strong>
 
 </div>
@@ -925,7 +925,7 @@ Temps
 id="timer"
 class="timer"
 >
-10
+⏱️ 10
 </strong>
 
 </div>
@@ -1219,17 +1219,6 @@ const wrongBuzzer =
 $("wrongBuzzer");
 
 
-  console.log(
-  "Correct buzzer URL :",
-  correctBuzzer.src
-);
-
-console.log(
-  "Wrong buzzer URL :",
-  wrongBuzzer.src
-);
-
-  
 /*
    On force le navigateur à charger
    les fichiers audio depuis GitHub.
@@ -1666,7 +1655,7 @@ function updateTimer() {
 
 
   timer.textContent =
-  timeLeft;
+  `⏱️ ${timeLeft}`;
 
 
   timer.classList.remove(
@@ -1793,7 +1782,7 @@ function renderQuestion() {
 
   $("counter")
   .textContent =
-  `${current + 1} / ${gameQuestions.length}`;
+  `📝 ${current + 1} / ${gameQuestions.length}`;
 
 
   $("progressBar")
