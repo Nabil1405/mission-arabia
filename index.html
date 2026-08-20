@@ -10,17 +10,13 @@ name="viewport"
 content="width=device-width, initial-scale=1.0"
 >
 
-<title>
-Mission : العربي — Jeu d'apprentissage
-</title>
-
+<title>Mission : العربي — Jeu d'apprentissage</title>
 
 <style>
 
 * {
   box-sizing: border-box;
 }
-
 
 body {
 
@@ -29,43 +25,42 @@ body {
   min-height: 100vh;
 
   font-family:
-  Arial,
-  "Noto Sans",
-  sans-serif;
+    Arial,
+    "Noto Sans",
+    sans-serif;
 
   background:
-  linear-gradient(
-    135deg,
-    #f7f2e8,
-    #eadbc8
-  );
+    linear-gradient(
+      135deg,
+      #f7f2e8,
+      #eadbc8
+    );
 
   color: #2f241d;
 
   padding: 20px;
-
 }
 
 
 .app {
 
   width:
-  min(800px, 100%);
+    min(800px, 100%);
 
   margin: auto;
 
   background:
-  #fffdf9;
+    #fffdf9;
 
   border-radius:
-  26px;
+    26px;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   box-shadow:
-  0 18px 50px
-  rgba(55,38,25,.15);
-
+    0 18px 50px
+    rgba(55,38,25,.15);
 }
 
 
@@ -76,301 +71,279 @@ body {
 header {
 
   background:
-  #3f2b20;
+    #3f2b20;
 
   color:
-  white;
+    white;
 
   padding:
-  22px 26px;
+    22px 26px;
 
   text-align:
-  center;
-
+    center;
 }
-
 
 header h1 {
 
   margin:
-  0;
+    0;
 
   font-size:
-  24px;
-
+    24px;
 }
-
 
 header p {
 
   margin:
-  5px 0 0;
+    5px 0 0;
 
   color:
-  #f1d59f;
-
-  opacity:
-  1;
+    #f1d59f;
 
   font-size:
-  14px;
+    14px;
 
   font-weight:
-  bold;
-
+    bold;
 }
 
 
 /* =========================================================
-   CONTENU
+   MAIN
 ========================================================= */
 
 main {
 
   padding:
-  28px;
-
+    28px;
 }
 
 
 .screen {
 
   display:
-  none;
-
+    none;
 }
 
 
 .screen.active {
 
   display:
-  block;
-
+    block;
 }
 
 
 .center {
 
   text-align:
-  center;
+    center;
 
   padding:
-  20px 5px;
-
+    20px 5px;
 }
 
 
 .arabic-title {
 
   font-size:
-  clamp(45px, 10vw, 70px);
+    clamp(45px, 10vw, 70px);
 
   direction:
-  rtl;
+    rtl;
 
   color:
-  #3f2b20;
+    #3f2b20;
 
   font-weight:
-  bold;
+    bold;
 
   margin:
-  10px 10px 0;
-
+    10px 10px 0;
 }
 
 
 h2 {
 
   font-size:
-  28px;
-
+    28px;
 }
 
 
 p {
 
   line-height:
-  1.6;
+    1.6;
 
   color:
-  #6d5a4b;
-
+    #6d5a4b;
 }
 
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 input {
 
   width:
-  100%;
+    100%;
 
   padding:
-  15px;
+    15px;
 
   border:
-  2px solid #e1d5c8;
+    2px solid #e1d5c8;
 
   border-radius:
-  13px;
+    13px;
 
   font-size:
-  17px;
+    17px;
 
   margin:
-  8px 0 15px;
+    8px 0 15px;
 
   outline:
-  none;
-
+    none;
 }
 
 
 input:focus {
 
   border-color:
-  #8b5e3c;
-
+    #8b5e3c;
 }
 
 
 /* =========================================================
-   BOUTONS
+   BUTTONS
 ========================================================= */
 
 .primary,
 .secondary {
 
   border:
-  0;
+    0;
 
   border-radius:
-  13px;
+    13px;
 
   padding:
-  14px 24px;
+    14px 24px;
 
   font-weight:
-  bold;
+    bold;
 
   font-size:
-  16px;
+    16px;
 
   cursor:
-  pointer;
-
+    pointer;
 }
 
 
 .primary {
 
   background:
-  #8b5e3c;
+    #8b5e3c;
 
   color:
-  white;
-
+    white;
 }
 
 
 .primary:hover {
 
   background:
-  #744c30;
-
+    #744c30;
 }
 
 
 .secondary {
 
   background:
-  #eee5da;
+    #eee5da;
 
   color:
-  #3f2b20;
-
+    #3f2b20;
 }
 
 
 .error {
 
   color:
-  #a32f27;
+    #a32f27;
 
   font-weight:
-  bold;
+    bold;
 
   min-height:
-  25px;
-
+    25px;
 }
 
 
 .status {
 
   font-size:
-  14px;
+    14px;
 
   min-height:
-  22px;
+    22px;
 
   margin-top:
-  12px;
-
+    12px;
 }
 
 
 /* =========================================================
-   STATISTIQUES
+   STATS
 ========================================================= */
 
 .stats {
 
   display:
-  grid;
+    grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
   gap:
-  10px;
+    10px;
 
   margin-bottom:
-  18px;
-
+    18px;
 }
 
 
 .stat {
 
   background:
-  #f5eee5;
+    #f5eee5;
 
   padding:
-  11px;
+    11px;
 
   border-radius:
-  13px;
+    13px;
 
   text-align:
-  center;
+    center;
 
   font-size:
-  13px;
-
+    13px;
 }
 
 
 .stat strong {
 
   display:
-  block;
+    block;
 
   font-size:
-  22px;
+    22px;
 
   margin-top:
-  4px;
-
+    4px;
 }
 
 
@@ -381,94 +354,82 @@ input:focus {
 .timer {
 
   transition:
-  0.3s;
-
+    .3s;
 }
 
 
 .timer.warning {
 
   color:
-  #b7352c;
-
+    #b7352c;
 }
 
 
 .timer.danger {
 
   color:
-  #8b2f27;
+    #8b2f27;
 
   animation:
-  pulse 0.7s infinite;
-
+    pulse .7s infinite;
 }
 
 
 @keyframes pulse {
 
   0% {
-
     transform:
-    scale(1);
-
+      scale(1);
   }
 
   50% {
-
     transform:
-    scale(1.08);
-
+      scale(1.08);
   }
 
   100% {
-
     transform:
-    scale(1);
-
+      scale(1);
   }
-
 }
 
 
 /* =========================================================
-   PROGRESSION
+   PROGRESS
 ========================================================= */
 
 .progress {
 
   height:
-  9px;
+    9px;
 
   background:
-  #eee5da;
+    #eee5da;
 
   border-radius:
-  99px;
+    99px;
 
   overflow:
-  hidden;
+    hidden;
 
   margin-bottom:
-  25px;
-
+    25px;
 }
 
 
 .bar {
 
   height:
-  100%;
+    100%;
 
   background:
-  #8b5e3c;
+    #8b5e3c;
 
   width:
-  0;
+    0;
 
   transition:
-  .3s;
-
+    .3s;
 }
 
 
@@ -479,8 +440,7 @@ input:focus {
 .q {
 
   text-align:
-  center;
-
+    center;
 }
 
 
@@ -491,178 +451,170 @@ input:focus {
 .q img {
 
   display:
-  block;
+    block;
 
   width:
-  min(280px, 80%);
+    min(280px, 80%);
 
   height:
-  190px;
+    190px;
 
   object-fit:
-  contain;
+    contain;
 
   border-radius:
-  18px;
+    18px;
 
   background:
-  #eee5da;
+    #eee5da;
 
   margin:
-  0 auto;
-
+    0 auto 20px;
 }
 
 
 /* =========================================================
-   AUDIO
+   QUESTION AUDIO
 ========================================================= */
 
 .audio-container {
 
   background:
-  #f5eee5;
+    #f5eee5;
 
   border-radius:
-  18px;
+    18px;
 
   padding:
-  22px;
+    22px;
 
   margin:
-  10px auto 20px;
+    0 auto 20px;
 
   width:
-  min(500px, 100%);
-
+    min(500px, 100%);
 }
 
 
 .audio-title {
 
   font-size:
-  16px;
+    16px;
 
   font-weight:
-  bold;
+    bold;
 
   margin-bottom:
-  12px;
+    12px;
 
   color:
-  #3f2b20;
-
+    #3f2b20;
 }
 
 
-audio {
+.audio-container audio {
 
   width:
-  100%;
-
+    100%;
 }
 
 
 /* =========================================================
-   QUESTION TEXTE
+   QUESTION TEXT
 ========================================================= */
 
 .question {
 
   font-size:
-  28px;
+    28px;
 
   direction:
-  rtl;
+    rtl;
 
   font-weight:
-  bold;
+    bold;
 
   margin:
-  20px;
-
+    20px;
 }
 
 
 /* =========================================================
-   RÉPONSES
+   ANSWERS
 ========================================================= */
 
 .answers {
 
   display:
-  grid;
+    grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
   gap:
-  12px;
-
+    12px;
 }
 
 
 .answer {
 
   background:
-  #fff;
+    #fff;
 
   border:
-  2px solid #e4d9cd;
+    2px solid #e4d9cd;
 
   border-radius:
-  13px;
+    13px;
 
   padding:
-  15px;
+    15px;
 
   font-size:
-  20px;
+    20px;
 
   cursor:
-  pointer;
+    pointer;
 
   direction:
-  rtl;
-
+    rtl;
 }
 
 
 .answer:hover {
 
   border-color:
-  #8b5e3c;
-
+    #8b5e3c;
 }
 
 
 .answer:disabled {
 
   cursor:
-  default;
+    default;
 
+  opacity:
+    .95;
 }
 
 
 .answer.correct {
 
   background:
-  #e7f5e9;
+    #e7f5e9;
 
   border-color:
-  #55a563;
-
+    #55a563;
 }
 
 
 .answer.wrong {
 
   background:
-  #fae9e7;
+    #fae9e7;
 
   border-color:
-  #d86b60;
-
+    #d86b60;
 }
 
 
@@ -673,123 +625,114 @@ audio {
 .feedback {
 
   text-align:
-  center;
+    center;
 
   min-height:
-  30px;
+    30px;
 
   font-weight:
-  bold;
+    bold;
 
   margin:
-  15px;
-
+    15px;
 }
 
 
 .next {
 
   text-align:
-  center;
-
+    center;
 }
 
 
 /* =========================================================
-   RESULTAT
+   RESULT
 ========================================================= */
 
 .result {
 
   text-align:
-  center;
-
+    center;
 }
 
 
 .trophy {
 
   font-size:
-  65px;
-
+    65px;
 }
 
 
 .resultbox {
 
   background:
-  #f5eee5;
+    #f5eee5;
 
   border-radius:
-  15px;
+    15px;
 
   padding:
-  18px;
+    18px;
 
   margin:
-  20px auto;
+    20px auto;
 
   max-width:
-  300px;
+    300px;
 
   font-size:
-  18px;
-
+    18px;
 }
 
 
 .resultbox strong {
 
   display:
-  block;
+    block;
 
   font-size:
-  28px;
+    28px;
 
   margin-top:
-  5px;
-
+    5px;
 }
 
+
+/* =========================================================
+   LOADING
+========================================================= */
 
 .loading {
 
   text-align:
-  center;
+    center;
 
   padding:
-  40px 10px;
-
+    40px 10px;
 }
 
 
 .spinner {
 
   font-size:
-  40px;
+    40px;
 
   animation:
-  spin 1.2s linear infinite;
-
+    spin 1.2s linear infinite;
 }
 
 
 @keyframes spin {
 
   from {
-
     transform:
-    rotate(0deg);
-
+      rotate(0deg);
   }
 
   to {
-
     transform:
-    rotate(360deg);
-
+      rotate(360deg);
   }
-
 }
 
 
@@ -800,37 +743,29 @@ audio {
 @media(max-width:560px) {
 
   body {
-
     padding:
-    0;
-
+      0;
   }
-
 
   .app {
 
     min-height:
-    100vh;
+      100vh;
 
     border-radius:
-    0;
-
+      0;
   }
-
 
   main {
 
     padding:
-    20px;
-
+      20px;
   }
-
 
   .answers {
 
     grid-template-columns:
-    1fr;
-
+      1fr;
   }
 
 }
@@ -867,7 +802,7 @@ Apprendre l'arabe en jouant
 
 
 <!-- =====================================================
-     ÉCRAN CONNEXION
+     LOGIN
 ===================================================== -->
 
 <section
@@ -883,7 +818,7 @@ class="screen active"
 </div>
 
 
-<h2 style="margin-top: 0;">
+<h2 style="margin-top:0;">
 Bienvenue ! 👋
 </h2>
 
@@ -931,7 +866,7 @@ Connexion à Firebase…
 
 
 <!-- =====================================================
-     ÉCRAN CHARGEMENT
+     LOADING
 ===================================================== -->
 
 <section
@@ -941,21 +876,17 @@ class="screen"
 
 <div class="loading">
 
-
 <div class="spinner">
 ⏳
 </div>
-
 
 <h2>
 Chargement du jeu...
 </h2>
 
-
 <p>
 Récupération des questions.
 </p>
-
 
 </div>
 
@@ -963,7 +894,7 @@ Récupération des questions.
 
 
 <!-- =====================================================
-     ÉCRAN JEU
+     GAME
 ===================================================== -->
 
 <section
@@ -1037,7 +968,6 @@ style="display:none;"
 🎧 Écoute et choisis la bonne réponse
 </div>
 
-
 <audio
 id="questionAudio"
 controls
@@ -1057,7 +987,7 @@ id="questionText"
 </div>
 
 
-<!-- RÉPONSES -->
+<!-- ANSWERS -->
 
 <div
 class="answers"
@@ -1070,19 +1000,16 @@ id="answers"
 
 <div
 class="feedback"
-id="feedback"
->
+id="feedback">
 </div>
 
-
-<!-- BOUTON SUIVANT -->
 
 <div class="next">
 
 <button
 class="primary"
 id="nextBtn"
-style="display:none"
+style="display:none;"
 >
 Question suivante →
 </button>
@@ -1096,7 +1023,7 @@ Question suivante →
 
 
 <!-- =====================================================
-     ÉCRAN RESULTAT
+     RESULT
 ===================================================== -->
 
 <section
@@ -1104,15 +1031,12 @@ id="resultScreen"
 class="screen"
 >
 
-<div
-class="center result"
->
+<div class="center result">
 
 
 <div
 class="trophy"
-id="trophy"
->
+id="trophy">
 🏆
 </div>
 
@@ -1139,8 +1063,7 @@ Bonnes réponses
 
 <div
 id="saveStatus"
-class="status"
->
+class="status">
 Enregistrement du résultat…
 </div>
 
@@ -1170,14 +1093,14 @@ onclick="location.reload()"
 <audio
 id="correctBuzzer"
 preload="auto"
->
+src="audio/correct.mp3">
 </audio>
 
 
 <audio
 id="wrongBuzzer"
 preload="auto"
->
+src="audio/wrong.mp3">
 </audio>
 
 
@@ -1190,13 +1113,17 @@ preload="auto"
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
 import {
   getAuth,
   signInAnonymously
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 import {
@@ -1205,7 +1132,9 @@ import {
   getDocs,
   addDoc,
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -1235,7 +1164,9 @@ const firebaseConfig = {
 
 
 const app =
-initializeApp(firebaseConfig);
+initializeApp(
+  firebaseConfig
+);
 
 
 const auth =
@@ -1244,23 +1175,6 @@ getAuth(app);
 
 const db =
 getFirestore(app);
-
-
-/* =========================================================
-   BUZZERS
-========================================================= */
-
-/*
-   REMPLACE CES DEUX URLS
-   PAR LES URLS DE TES FICHIERS AUDIO.
-*/
-
-const CORRECT_BUZZER_URL =
-"audio/correct.mp3";
-
-
-const WRONG_BUZZER_URL =
-"audio/wrong.mp3";
 
 
 /* =========================================================
@@ -1287,7 +1201,7 @@ let timeLeft = 10;
 
 
 /* =========================================================
-   OUTILS
+   OUTIL $
 ========================================================= */
 
 const $ = id =>
@@ -1295,119 +1209,112 @@ document.getElementById(id);
 
 
 /* =========================================================
-   BUZZER SETUP
+   BUZZERS
 ========================================================= */
 
 const correctBuzzer =
 $("correctBuzzer");
 
-
 const wrongBuzzer =
 $("wrongBuzzer");
 
 
-correctBuzzer.src =
-CORRECT_BUZZER_URL;
-
-
-wrongBuzzer.src =
-WRONG_BUZZER_URL;
-
-
 /*
-   Fonction pour jouer le buzzer correct.
+   On force le navigateur à charger
+   les fichiers audio depuis GitHub.
 */
+
+correctBuzzer.load();
+
+wrongBuzzer.load();
+
+
+/* =========================================================
+   JOUER CORRECT BUZZER
+========================================================= */
 
 function playCorrectBuzzer() {
 
-  if(
-    !CORRECT_BUZZER_URL ||
-    CORRECT_BUZZER_URL ===
-    "URL_DE_TON_CORRECT_BUZZER"
-  ) {
-
-    console.warn(
-      "Correct buzzer : URL non configurée."
-    );
-
-    return;
-
-  }
-
+  correctBuzzer.pause();
 
   correctBuzzer.currentTime = 0;
 
-
-  correctBuzzer.play()
-  .catch(error => {
-
-    console.warn(
-      "Impossible de jouer le correct buzzer :",
-      error
-    );
-
-  });
-
-}
+  const promise =
+  correctBuzzer.play();
 
 
-/*
-   Fonction pour jouer le buzzer incorrect.
-*/
+  if(promise !== undefined) {
 
-function playWrongBuzzer() {
+    promise.catch(error => {
 
-  if(
-    !WRONG_BUZZER_URL ||
-    WRONG_BUZZER_URL ===
-    "URL_DE_TON_WRONG_BUZZER"
-  ) {
+      console.error(
+        "Erreur correct buzzer :",
+        error
+      );
 
-    console.warn(
-      "Wrong buzzer : URL non configurée."
-    );
-
-    return;
+    });
 
   }
-
-
-  wrongBuzzer.currentTime = 0;
-
-
-  wrongBuzzer.play()
-  .catch(error => {
-
-    console.warn(
-      "Impossible de jouer le wrong buzzer :",
-      error
-    );
-
-  });
 
 }
 
 
 /* =========================================================
-   AFFICHER UNE ÉCRAN
+   JOUER WRONG BUZZER
+========================================================= */
+
+function playWrongBuzzer() {
+
+  wrongBuzzer.pause();
+
+  wrongBuzzer.currentTime = 0;
+
+  const promise =
+  wrongBuzzer.play();
+
+
+  if(promise !== undefined) {
+
+    promise.catch(error => {
+
+      console.error(
+        "Erreur wrong buzzer :",
+        error
+      );
+
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   SCREEN
 ========================================================= */
 
 function showScreen(id) {
 
   document
   .querySelectorAll(".screen")
-  .forEach(screen =>
-    screen.classList.remove("active")
+  .forEach(screen => {
+
+    screen.classList.remove(
+      "active"
+    );
+
+  });
+
+
+  $(id).classList.add(
+    "active"
   );
-
-
-  $(id).classList.add("active");
 
 }
 
 
 /* =========================================================
-   AUTHENTIFICATION FIREBASE
+   FIREBASE AUTH
 ========================================================= */
 
 async function initializeFirebase() {
@@ -1415,22 +1322,26 @@ async function initializeFirebase() {
   try {
 
     const result =
-    await signInAnonymously(auth);
+    await signInAnonymously(
+      auth
+    );
 
 
     firebaseUser =
     result.user;
 
 
-    $("firebaseStatus").textContent =
+    $("firebaseStatus")
+    .textContent =
     "✅ Connexion sécurisée prête.";
 
 
-    $("firebaseStatus").style.color =
+    $("firebaseStatus")
+    .style
+    .color =
     "#276431";
 
   }
-
 
   catch(error) {
 
@@ -1440,11 +1351,14 @@ async function initializeFirebase() {
     );
 
 
-    $("firebaseStatus").textContent =
+    $("firebaseStatus")
+    .textContent =
     "⚠️ Impossible de se connecter à Firebase.";
 
 
-    $("firebaseStatus").style.color =
+    $("firebaseStatus")
+    .style
+    .color =
     "#8b2f27";
 
   }
@@ -1456,7 +1370,7 @@ initializeFirebase();
 
 
 /* =========================================================
-   RÉCUPÉRER QUESTIONS FIRESTORE
+   LOAD QUESTIONS
 ========================================================= */
 
 async function loadQuestions() {
@@ -1465,7 +1379,10 @@ async function loadQuestions() {
 
     const snapshot =
     await getDocs(
-      collection(db, "questions")
+      collection(
+        db,
+        "questions"
+      )
     );
 
 
@@ -1527,7 +1444,6 @@ async function loadQuestions() {
 
   }
 
-
   catch(error) {
 
     console.error(
@@ -1536,7 +1452,8 @@ async function loadQuestions() {
     );
 
 
-    $("loginError").textContent =
+    $("loginError")
+    .textContent =
     "Impossible de récupérer les questions depuis Firebase.";
 
 
@@ -1553,21 +1470,21 @@ async function loadQuestions() {
 
 
 /* =========================================================
-   MÉLANGER
+   SHUFFLE
 ========================================================= */
 
 function shuffle(array) {
 
   return array.sort(
     () =>
-    Math.random() - 0.5
+      Math.random() - 0.5
   );
 
 }
 
 
 /* =========================================================
-   COMMENCER
+   START GAME
 ========================================================= */
 
 $("startBtn")
@@ -1587,7 +1504,8 @@ async function startGame() {
 
   if(!studentName) {
 
-    $("loginError").textContent =
+    $("loginError")
+    .textContent =
     "Veuillez entrer votre nom et prénom.";
 
     return;
@@ -1597,7 +1515,8 @@ async function startGame() {
 
   if(!firebaseUser) {
 
-    $("loginError").textContent =
+    $("loginError")
+    .textContent =
     "La connexion Firebase n'est pas encore prête.";
 
     return;
@@ -1605,7 +1524,8 @@ async function startGame() {
   }
 
 
-  $("loginError").textContent =
+  $("loginError")
+  .textContent =
   "";
 
 
@@ -1673,7 +1593,7 @@ function startTimer() {
   10;
 
 
-  updateTimerDisplay();
+  updateTimer();
 
 
   timerInterval =
@@ -1682,7 +1602,7 @@ function startTimer() {
     timeLeft--;
 
 
-    updateTimerDisplay();
+    updateTimer();
 
 
     if(
@@ -1702,12 +1622,14 @@ function startTimer() {
 
 
 /* =========================================================
-   ARRÊTER TIMER
+   STOP TIMER
 ========================================================= */
 
 function stopTimer() {
 
-  if(timerInterval) {
+  if(
+    timerInterval !== null
+  ) {
 
     clearInterval(
       timerInterval
@@ -1723,10 +1645,10 @@ function stopTimer() {
 
 
 /* =========================================================
-   AFFICHER TIMER
+   UPDATE TIMER
 ========================================================= */
 
-function updateTimerDisplay() {
+function updateTimer() {
 
   const timer =
   $("timer");
@@ -1752,7 +1674,6 @@ function updateTimerDisplay() {
 
   }
 
-
   else if(
     timeLeft <= 5
   ) {
@@ -1767,7 +1688,7 @@ function updateTimerDisplay() {
 
 
 /* =========================================================
-   TEMPS ÉCOULÉ
+   TIME OUT
 ========================================================= */
 
 function timeOut() {
@@ -1796,13 +1717,16 @@ function timeOut() {
 
   document
   .querySelectorAll(".answer")
-  .forEach(button =>
-    button.disabled = true
-  );
+  .forEach(button => {
+
+    button.disabled =
+    true;
+
+  });
 
 
   /*
-     Montrer bonne réponse.
+     Montrer bonne réponse
   */
 
   document
@@ -1823,24 +1747,27 @@ function timeOut() {
   });
 
 
-  $("feedback").textContent =
+  $("feedback")
+  .textContent =
   `⏰ Temps écoulé ! La bonne réponse était : ${question.word}`;
 
 
-  $("feedback").style.color =
+  $("feedback")
+  .style
+  .color =
   "#8b2f27";
 
 
   setTimeout(
     finishGame,
-    1200
+    1300
   );
 
 }
 
 
 /* =========================================================
-   AFFICHER QUESTION
+   RENDER QUESTION
 ========================================================= */
 
 function renderQuestion() {
@@ -1853,35 +1780,40 @@ function renderQuestion() {
   false;
 
 
-  $("counter").textContent =
+  $("counter")
+  .textContent =
   `${current + 1} / ${gameQuestions.length}`;
 
 
-  $("progressBar").style.width =
-  `${current / gameQuestions.length * 100}%`;
+  $("progressBar")
+  .style
+  .width =
+  `${current /
+  gameQuestions.length *
+  100}%`;
 
 
   /*
-     ARRÊTER AUDIO QUESTION PRÉCÉDENT
+     Arrêter l'audio précédent
   */
 
-  const audio =
+  const questionAudio =
   $("questionAudio");
 
 
-  audio.pause();
+  questionAudio.pause();
 
 
-  audio.currentTime =
+  questionAudio.currentTime =
   0;
 
 
-  audio.removeAttribute(
+  questionAudio.removeAttribute(
     "src"
   );
 
 
-  audio.load();
+  questionAudio.load();
 
 
   /*
@@ -1904,14 +1836,13 @@ function renderQuestion() {
     "none";
 
 
-    audio.src =
+    questionAudio.src =
     question.audio;
 
 
-    audio.load();
+    questionAudio.load();
 
   }
-
 
   else if(
     question.image
@@ -1929,11 +1860,11 @@ function renderQuestion() {
     "block";
 
 
-    $("questionImage").src =
+    $("questionImage")
+    .src =
     question.image;
 
   }
-
 
   else {
 
@@ -1968,7 +1899,7 @@ function renderQuestion() {
 
 
   /*
-     RÉPONSES
+     Réponses
   */
 
   const answers =
@@ -2021,7 +1952,7 @@ function renderQuestion() {
 
 
   /*
-     DÉMARRER TIMER
+     Démarrer timer
   */
 
   startTimer();
@@ -2030,7 +1961,7 @@ function renderQuestion() {
 
 
 /* =========================================================
-   VÉRIFIER RÉPONSE
+   CHECK ANSWER
 ========================================================= */
 
 function checkAnswer(
@@ -2058,13 +1989,16 @@ function checkAnswer(
 
   document
   .querySelectorAll(".answer")
-  .forEach(button =>
-    button.disabled = true
-  );
+  .forEach(button => {
+
+    button.disabled =
+    true;
+
+  });
 
 
   /*
-     BONNE RÉPONSE
+     CORRECT
   */
 
   if(
@@ -2107,7 +2041,7 @@ function checkAnswer(
 
 
     /*
-       DERNIÈRE QUESTION
+       Dernière question
     */
 
     if(
@@ -2117,11 +2051,10 @@ function checkAnswer(
 
       setTimeout(
         finishGame,
-        800
+        900
       );
 
     }
-
 
     else {
 
@@ -2136,7 +2069,7 @@ function checkAnswer(
 
 
   /*
-     MAUVAISE RÉPONSE
+     WRONG
   */
 
   else {
@@ -2154,7 +2087,7 @@ function checkAnswer(
 
 
     /*
-       Afficher bonne réponse.
+       Montrer bonne réponse
     */
 
     document
@@ -2187,12 +2120,12 @@ function checkAnswer(
 
 
     /*
-       FIN DU JEU
+       FIN
     */
 
     setTimeout(
       finishGame,
-      1200
+      1300
     );
 
   }
@@ -2201,7 +2134,7 @@ function checkAnswer(
 
 
 /* =========================================================
-   QUESTION SUIVANTE
+   NEXT QUESTION
 ========================================================= */
 
 $("nextBtn")
@@ -2225,7 +2158,6 @@ function nextQuestion() {
 
   }
 
-
   else {
 
     finishGame();
@@ -2245,24 +2177,16 @@ async function finishGame() {
 
 
   /*
-     Arrêter audio question.
+     Arrêter audio question
   */
 
-  const audio =
-  $("questionAudio");
-
-
-  audio.pause();
+  $("questionAudio")
+  .pause();
 
 
   /*
-     Arrêter les buzzers
-     au cas où.
+     Résultat
   */
-
-  correctBuzzer.pause();
-  wrongBuzzer.pause();
-
 
   showScreen(
     "resultScreen"
@@ -2284,7 +2208,7 @@ async function finishGame() {
 
 
   /*
-     RÉSULTAT
+     TROPHÉE
   */
 
   if(
@@ -2302,7 +2226,6 @@ async function finishGame() {
 
   }
 
-
   else if(
     correct >=
     total * 0.7
@@ -2319,7 +2242,6 @@ async function finishGame() {
 
   }
 
-
   else if(
     correct >=
     total * 0.5
@@ -2335,7 +2257,6 @@ async function finishGame() {
     "Bon travail !";
 
   }
-
 
   else {
 
@@ -2357,7 +2278,7 @@ async function finishGame() {
 
 
 /* =========================================================
-   ENREGISTRER RÉSULTAT
+   SAVE SCORE
 ========================================================= */
 
 async function saveScore() {
@@ -2423,7 +2344,6 @@ async function saveScore() {
     "#276431";
 
   }
-
 
   catch(error) {
 
