@@ -7,16 +7,16 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 >
 
-<title>Mission : الحُرُوف — Jeu d'apprentissage</title>
+<title>Mission : العربي — Jeu d'apprentissage</title>
 
 
 <style>
 
 /* =========================================================
-   BASE
+   RESET
 ========================================================= */
 
 * {
@@ -24,11 +24,16 @@
 }
 
 
+html,
 body {
-
   margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
 
-  min-height: 100vh;
+
+body {
 
   font-family:
     Arial,
@@ -42,9 +47,11 @@ body {
       #eadbc8
     );
 
-  color: #2f241d;
+  color:
+    #2f241d;
 
-  padding: 20px;
+  padding:
+    12px;
 }
 
 
@@ -55,22 +62,25 @@ body {
 .app {
 
   width:
-    min(800px, 100%);
+    100%;
+
+  max-width:
+    900px;
 
   margin:
-    auto;
+    0 auto;
 
   background:
     #fffdf9;
 
   border-radius:
-    26px;
+    24px;
 
   overflow:
     hidden;
 
   box-shadow:
-    0 18px 50px
+    0 15px 45px
     rgba(55,38,25,.15);
 }
 
@@ -88,7 +98,7 @@ header {
     white;
 
   padding:
-    22px 26px;
+    20px;
 
   text-align:
     center;
@@ -101,7 +111,7 @@ header h1 {
     0;
 
   font-size:
-    25px;
+    clamp(20px, 4vw, 26px);
 
   font-weight:
     700;
@@ -131,7 +141,7 @@ header p {
 main {
 
   padding:
-    28px;
+    clamp(16px, 4vw, 30px);
 }
 
 
@@ -149,13 +159,17 @@ main {
 }
 
 
+/* =========================================================
+   CENTRAGE
+========================================================= */
+
 .center {
 
   text-align:
     center;
 
   padding:
-    20px 5px;
+    10px 0;
 }
 
 
@@ -169,7 +183,7 @@ main {
     rtl;
 
   font-size:
-    clamp(48px, 11vw, 76px);
+    clamp(48px, 12vw, 76px);
 
   font-weight:
     800;
@@ -178,13 +192,10 @@ main {
     #3f2b20;
 
   line-height:
-    1.1;
+    1.05;
 
   margin:
     5px 0 8px;
-
-  letter-spacing:
-    1px;
 
   text-shadow:
     0 3px 8px
@@ -201,7 +212,7 @@ main {
     block;
 
   width:
-    70px;
+    65px;
 
   height:
     4px;
@@ -224,7 +235,7 @@ main {
 .welcome-title {
 
   font-size:
-    clamp(28px, 6vw, 36px);
+    clamp(26px, 6vw, 36px);
 
   color:
     #3f2b20;
@@ -233,17 +244,14 @@ main {
     700;
 
   margin:
-    10px 0 6px;
-
-  letter-spacing:
-    -0.5px;
+    10px 0 8px;
 }
 
 
 .welcome-description {
 
   max-width:
-    520px;
+    560px;
 
   margin:
     0 auto 20px;
@@ -252,31 +260,10 @@ main {
     15px;
 
   line-height:
-    1.7;
-
-  color:
-    #7a6758;
-}
-
-
-/* =========================================================
-   TEXTES
-========================================================= */
-
-h2 {
-
-  font-size:
-    28px;
-}
-
-
-p {
-
-  line-height:
     1.6;
 
   color:
-    #6d5a4b;
+    #7a6758;
 }
 
 
@@ -305,6 +292,9 @@ input {
     8px 0 15px;
 
   outline:
+    none;
+
+  -webkit-appearance:
     none;
 }
 
@@ -340,6 +330,12 @@ input:focus {
 
   cursor:
     pointer;
+
+  min-height:
+    48px;
+
+  touch-action:
+    manipulation;
 }
 
 
@@ -350,9 +346,6 @@ input:focus {
 
   color:
     white;
-
-  transition:
-    .2s;
 }
 
 
@@ -360,9 +353,6 @@ input:focus {
 
   background:
     #744c30;
-
-  transform:
-    translateY(-1px);
 }
 
 
@@ -377,7 +367,7 @@ input:focus {
 
 
 /* =========================================================
-   ERREURS
+   ERREUR
 ========================================================= */
 
 .error {
@@ -390,6 +380,9 @@ input:focus {
 
   min-height:
     25px;
+
+  margin-bottom:
+    5px;
 }
 
 
@@ -419,7 +412,7 @@ input:focus {
     1fr 1fr;
 
   gap:
-    10px;
+    12px;
 
   margin-bottom:
     18px;
@@ -432,10 +425,10 @@ input:focus {
     #f5eee5;
 
   padding:
-    13px;
+    13px 10px;
 
   border-radius:
-    13px;
+    14px;
 
   text-align:
     center;
@@ -447,23 +440,6 @@ input:focus {
     bold;
 }
 
-
-.stat strong {
-
-  display:
-    block;
-
-  font-size:
-    25px;
-
-  margin-top:
-    5px;
-}
-
-
-/* =========================================================
-   EMOJIS QUESTION / TEMPS
-========================================================= */
 
 .stat-label {
 
@@ -497,6 +473,19 @@ input:focus {
 }
 
 
+.stat strong {
+
+  display:
+    block;
+
+  font-size:
+    25px;
+
+  margin-top:
+    5px;
+}
+
+
 /* =========================================================
    TIMER
 ========================================================= */
@@ -504,7 +493,7 @@ input:focus {
 .timer {
 
   transition:
-    .3s;
+    .2s;
 }
 
 
@@ -550,6 +539,9 @@ input:focus {
 ========================================================= */
 
 .progress {
+
+  width:
+    100%;
 
   height:
     9px;
@@ -605,10 +597,10 @@ input:focus {
     block;
 
   width:
-    min(280px, 80%);
+    min(400px, 100%);
 
   height:
-    190px;
+    230px;
 
   object-fit:
     contain;
@@ -621,11 +613,14 @@ input:focus {
 
   margin:
     0 auto 20px;
+
+  padding:
+    5px;
 }
 
 
 /* =========================================================
-   AUDIO QUESTION
+   AUDIO
 ========================================================= */
 
 .audio-container {
@@ -637,13 +632,16 @@ input:focus {
     18px;
 
   padding:
-    22px;
+    20px;
 
   margin:
     0 auto 20px;
 
   width:
-    min(500px, 100%);
+    100%;
+
+  max-width:
+    600px;
 }
 
 
@@ -665,19 +663,25 @@ input:focus {
 
 .audio-container audio {
 
+  display:
+    block;
+
   width:
+    100%;
+
+  max-width:
     100%;
 }
 
 
 /* =========================================================
-   TEXTE QUESTION
+   QUESTION TEXTE
 ========================================================= */
 
 .question {
 
   font-size:
-    28px;
+    clamp(27px, 6vw, 34px);
 
   direction:
     rtl;
@@ -686,7 +690,10 @@ input:focus {
     bold;
 
   margin:
-    20px;
+    18px 10px 22px;
+
+  color:
+    #3f2b20;
 }
 
 
@@ -704,6 +711,9 @@ input:focus {
 
   gap:
     12px;
+
+  width:
+    100%;
 }
 
 
@@ -719,16 +729,22 @@ input:focus {
     13px;
 
   padding:
-    15px;
+    15px 12px;
+
+  min-height:
+    58px;
 
   font-size:
-    20px;
+    clamp(18px, 4vw, 21px);
 
   cursor:
     pointer;
 
   direction:
     rtl;
+
+  touch-action:
+    manipulation;
 
   transition:
     .15s;
@@ -739,9 +755,6 @@ input:focus {
 
   border-color:
     #8b5e3c;
-
-  transform:
-    translateY(-1px);
 }
 
 
@@ -791,7 +804,10 @@ input:focus {
     bold;
 
   margin:
-    15px;
+    15px 5px;
+
+  line-height:
+    1.5;
 }
 
 
@@ -803,6 +819,9 @@ input:focus {
 
   text-align:
     center;
+
+  margin-top:
+    10px;
 }
 
 
@@ -820,7 +839,7 @@ input:focus {
 .trophy {
 
   font-size:
-    65px;
+    clamp(55px, 12vw, 70px);
 }
 
 
@@ -838,8 +857,11 @@ input:focus {
   margin:
     20px auto;
 
+  width:
+    100%;
+
   max-width:
-    300px;
+    320px;
 
   font-size:
     18px;
@@ -852,7 +874,7 @@ input:focus {
     block;
 
   font-size:
-    28px;
+    30px;
 
   margin-top:
     5px;
@@ -860,7 +882,7 @@ input:focus {
 
 
 /* =========================================================
-   CHARGEMENT
+   LOADING
 ========================================================= */
 
 .loading {
@@ -886,33 +908,64 @@ input:focus {
 @keyframes spin {
 
   from {
-
     transform:
       rotate(0deg);
-
   }
 
   to {
-
     transform:
       rotate(360deg);
-
   }
 
 }
 
 
 /* =========================================================
-   MOBILE
+   TABLETTES
 ========================================================= */
 
-@media(max-width:560px) {
+@media (max-width:700px) {
+
+  body {
+
+    padding:
+      6px;
+  }
+
+
+  .app {
+
+    border-radius:
+      18px;
+  }
+
+
+  main {
+
+    padding:
+      18px;
+  }
+
+
+  .q img {
+
+    height:
+      210px;
+  }
+
+}
+
+
+/* =========================================================
+   TÉLÉPHONES
+========================================================= */
+
+@media (max-width:560px) {
 
   body {
 
     padding:
       0;
-
   }
 
 
@@ -923,15 +976,85 @@ input:focus {
 
     border-radius:
       0;
+  }
 
+
+  header {
+
+    padding:
+      17px 14px;
   }
 
 
   main {
 
     padding:
-      20px;
+      15px;
+  }
 
+
+  .arabic-title {
+
+    font-size:
+      52px;
+  }
+
+
+  .welcome-title {
+
+    font-size:
+      28px;
+  }
+
+
+  .stats {
+
+    gap:
+      8px;
+  }
+
+
+  .stat {
+
+    padding:
+      11px 6px;
+
+    font-size:
+      15px;
+  }
+
+
+  .stat-label {
+
+    font-size:
+      15px;
+
+    gap:
+      5px;
+  }
+
+
+  .stat-emoji {
+
+    font-size:
+      21px;
+  }
+
+
+  .stat strong {
+
+    font-size:
+      23px;
+  }
+
+
+  .q img {
+
+    width:
+      100%;
+
+    height:
+      210px;
   }
 
 
@@ -940,30 +1063,75 @@ input:focus {
     grid-template-columns:
       1fr;
 
+    gap:
+      10px;
   }
 
+
+  .answer {
+
+    width:
+      100%;
+
+    min-height:
+      56px;
+  }
+
+
+  .question {
+
+    margin:
+      16px 5px 20px;
+  }
+
+
+  .audio-container {
+
+    padding:
+      15px;
+  }
+
+}
+
+
+/* =========================================================
+   TRÈS PETITS TÉLÉPHONES
+========================================================= */
+
+@media (max-width:380px) {
 
   .arabic-title {
 
     font-size:
-      52px;
-
+      46px;
   }
 
 
   .stat-label {
 
     font-size:
-      16px;
-
+      14px;
   }
 
 
   .stat-emoji {
 
     font-size:
-      21px;
+      19px;
+  }
 
+
+  .stat strong {
+
+    font-size:
+      21px;
+  }
+
+
+  .question {
+
+    font-size:
+      26px;
   }
 
 }
@@ -986,11 +1154,11 @@ input:focus {
 <header>
 
 <h1>
-🧑‍🏫 Quiz : الحُرُوف
+🎮 Mission : العربي
 </h1>
 
 <p>
-Réviser l'arabe en jouant
+Apprendre l'arabe en jouant
 </p>
 
 </header>
@@ -1000,7 +1168,7 @@ Réviser l'arabe en jouant
 
 
 <!-- =====================================================
-     ÉCRAN CONNEXION
+     LOGIN
 ===================================================== -->
 
 <section
@@ -1012,7 +1180,7 @@ class="screen active"
 
 
 <div class="arabic-title">
-مَرْحَبًا !
+مهمّة العربية
 </div>
 
 
@@ -1022,7 +1190,7 @@ Bienvenue ! 👋
 
 
 <p class="welcome-description">
-Entrez votre prénom pour commencer le quiz.<br>
+Entrez votre nom et prénom pour commencer votre mission.<br>
 Votre résultat sera enregistré automatiquement.
 </p>
 
@@ -1032,7 +1200,7 @@ id="studentName"
 type="text"
 maxlength="80"
 autocomplete="name"
-placeholder="Votre prénom"
+placeholder="Nom et prénom"
 >
 
 
@@ -1044,16 +1212,14 @@ class="error">
 
 <button
 class="primary"
-id="startBtn"
->
+id="startBtn">
 🚀 Commencer le jeu
 </button>
 
 
 <div
 id="firebaseStatus"
-class="status"
->
+class="status">
 Connexion à Firebase…
 </div>
 
@@ -1064,7 +1230,7 @@ Connexion à Firebase…
 
 
 <!-- =====================================================
-     ÉCRAN CHARGEMENT
+     LOADING
 ===================================================== -->
 
 <section
@@ -1092,7 +1258,7 @@ Récupération des questions.
 
 
 <!-- =====================================================
-     ÉCRAN JEU
+     GAME
 ===================================================== -->
 
 <section
@@ -1108,9 +1274,13 @@ class="screen"
 
 <div class="stat-label">
 
-<span class="stat-emoji">📝</span>
+<span class="stat-emoji">
+📝
+</span>
 
-<span>Question</span>
+<span>
+Question
+</span>
 
 </div>
 
@@ -1126,17 +1296,20 @@ class="screen"
 
 <div class="stat-label">
 
-<span class="stat-emoji">⏱️</span>
+<span class="stat-emoji">
+⏱️
+</span>
 
-<span>Temps</span>
+<span>
+Temps
+</span>
 
 </div>
 
 
 <strong
 id="timer"
-class="timer"
->
+class="timer">
 10
 </strong>
 
@@ -1159,16 +1332,12 @@ id="progressBar">
 <div class="q">
 
 
-<!-- IMAGE -->
-
 <img
 id="questionImage"
 alt="Illustration"
 style="display:none;"
 >
 
-
-<!-- AUDIO -->
 
 <div
 id="audioContainer"
@@ -1180,34 +1349,27 @@ style="display:none;"
 🎧 Écoutez et choisissez la bonne réponse
 </div>
 
+
 <audio
 id="questionAudio"
-controls
->
+controls>
 </audio>
 
 </div>
 
 
-<!-- QUESTION -->
-
 <div
 class="question"
-id="questionText"
->
+id="questionText">
 مَا الحَرْفُ؟
 </div>
 
-
-<!-- RÉPONSES -->
 
 <div
 class="answers"
 id="answers">
 </div>
 
-
-<!-- FEEDBACK -->
 
 <div
 class="feedback"
@@ -1220,8 +1382,7 @@ id="feedback">
 <button
 class="primary"
 id="nextBtn"
-style="display:none;"
->
+style="display:none;">
 Question suivante →
 </button>
 
@@ -1234,7 +1395,7 @@ Question suivante →
 
 
 <!-- =====================================================
-     ÉCRAN RÉSULTAT
+     RESULT
 ===================================================== -->
 
 <section
@@ -1281,8 +1442,7 @@ Enregistrement du résultat…
 
 <button
 class="secondary"
-onclick="location.reload()"
->
+onclick="location.reload()">
 🔄 Rejouer
 </button>
 
@@ -1298,7 +1458,7 @@ onclick="location.reload()"
 
 
 <!-- =====================================================
-     BUZZERS GITHUB
+     BUZZERS
 ===================================================== -->
 
 <audio
@@ -1375,9 +1535,7 @@ const firebaseConfig = {
 
 
 const app =
-initializeApp(
-  firebaseConfig
-);
+initializeApp(firebaseConfig);
 
 
 const auth =
@@ -1431,15 +1589,6 @@ const wrongBuzzer =
 $("wrongBuzzer");
 
 
-correctBuzzer.load();
-
-wrongBuzzer.load();
-
-
-/* =========================================================
-   CORRECT BUZZER
-========================================================= */
-
 function playCorrectBuzzer() {
 
   correctBuzzer.pause();
@@ -1449,19 +1598,14 @@ function playCorrectBuzzer() {
   const promise =
   correctBuzzer.play();
 
-
-  if(
-    promise !== undefined
-  ) {
+  if (promise !== undefined) {
 
     promise.catch(
       error => {
-
         console.error(
           "Erreur correct buzzer :",
           error
         );
-
       }
     );
 
@@ -1469,10 +1613,6 @@ function playCorrectBuzzer() {
 
 }
 
-
-/* =========================================================
-   WRONG BUZZER
-========================================================= */
 
 function playWrongBuzzer() {
 
@@ -1483,19 +1623,14 @@ function playWrongBuzzer() {
   const promise =
   wrongBuzzer.play();
 
-
-  if(
-    promise !== undefined
-  ) {
+  if (promise !== undefined) {
 
     promise.catch(
       error => {
-
         console.error(
           "Erreur wrong buzzer :",
           error
         );
-
       }
     );
 
@@ -1528,7 +1663,7 @@ function showScreen(id) {
 
 
 /* =========================================================
-   AUTHENTIFICATION
+   FIREBASE AUTH
 ========================================================= */
 
 async function initializeFirebase() {
@@ -1582,7 +1717,7 @@ initializeFirebase();
 
 
 /* =========================================================
-   QUESTIONS FIRESTORE
+   QUESTIONS
 ========================================================= */
 
 async function loadQuestions() {
@@ -1637,13 +1772,7 @@ async function loadQuestions() {
     );
 
 
-    console.log(
-      "Questions récupérées :",
-      questions
-    );
-
-
-    if(
+    if (
       questions.length === 0
     ) {
 
@@ -1661,7 +1790,6 @@ async function loadQuestions() {
   catch(error) {
 
     console.error(
-      "Erreur récupération questions :",
       error
     );
 
@@ -1684,7 +1812,7 @@ async function loadQuestions() {
 
 
 /* =========================================================
-   MÉLANGE
+   SHUFFLE
 ========================================================= */
 
 function shuffle(array) {
@@ -1698,7 +1826,7 @@ function shuffle(array) {
 
 
 /* =========================================================
-   COMMENCER
+   START
 ========================================================= */
 
 $("startBtn")
@@ -1716,20 +1844,20 @@ async function startGame() {
   .trim();
 
 
-  if(
+  if (
     !studentName
   ) {
 
     $("loginError")
     .textContent =
-    "Veuillez entrer votre prénom.";
+    "Veuillez entrer votre nom et prénom.";
 
     return;
 
   }
 
 
-  if(
+  if (
     !firebaseUser
   ) {
 
@@ -1756,9 +1884,7 @@ async function startGame() {
   await loadQuestions();
 
 
-  if(
-    !loaded
-  ) {
+  if (!loaded) {
 
     return;
 
@@ -1778,12 +1904,9 @@ async function startGame() {
   );
 
 
-  current =
-  0;
+  current = 0;
 
-
-  correct =
-  0;
+  correct = 0;
 
 
   showScreen(
@@ -1805,8 +1928,7 @@ function startTimer() {
   stopTimer();
 
 
-  timeLeft =
-  10;
+  timeLeft = 10;
 
 
   updateTimer();
@@ -1822,12 +1944,11 @@ function startTimer() {
       updateTimer();
 
 
-      if(
+      if (
         timeLeft <= 0
       ) {
 
         stopTimer();
-
 
         timeOut();
 
@@ -1840,20 +1961,15 @@ function startTimer() {
 }
 
 
-/* =========================================================
-   ARRÊTER TIMER
-========================================================= */
-
 function stopTimer() {
 
-  if(
+  if (
     timerInterval !== null
   ) {
 
     clearInterval(
       timerInterval
     );
-
 
     timerInterval =
     null;
@@ -1862,10 +1978,6 @@ function stopTimer() {
 
 }
 
-
-/* =========================================================
-   AFFICHER TIMER
-========================================================= */
 
 function updateTimer() {
 
@@ -1883,7 +1995,7 @@ function updateTimer() {
   );
 
 
-  if(
+  if (
     timeLeft <= 3
   ) {
 
@@ -1893,7 +2005,7 @@ function updateTimer() {
 
   }
 
-  else if(
+  else if (
     timeLeft <= 5
   ) {
 
@@ -1907,12 +2019,12 @@ function updateTimer() {
 
 
 /* =========================================================
-   TEMPS ÉCOULÉ
+   TIMEOUT
 ========================================================= */
 
 function timeOut() {
 
-  if(
+  if (
     answered
   ) {
 
@@ -1921,8 +2033,7 @@ function timeOut() {
   }
 
 
-  answered =
-  true;
+  answered = true;
 
 
   const question =
@@ -1949,7 +2060,7 @@ function timeOut() {
   .forEach(
     button => {
 
-      if(
+      if (
         button.textContent ===
         question.word
       ) {
@@ -1983,7 +2094,7 @@ function timeOut() {
 
 
 /* =========================================================
-   AFFICHER QUESTION
+   RENDER QUESTION
 ========================================================= */
 
 function renderQuestion() {
@@ -2008,78 +2119,76 @@ function renderQuestion() {
   100}%`;
 
 
-  const questionAudio =
+  const image =
+  $("questionImage");
+
+
+  const audioContainer =
+  $("audioContainer");
+
+
+  const audio =
   $("questionAudio");
 
 
-  questionAudio.pause();
+  audio.pause();
 
+  audio.currentTime = 0;
 
-  questionAudio.currentTime =
-  0;
-
-
-  questionAudio.removeAttribute(
+  audio.removeAttribute(
     "src"
   );
 
+  audio.load();
 
-  questionAudio.load();
 
-
-  /* AUDIO OU IMAGE */
-
-  if(
+  if (
     question.audio
   ) {
 
-    $("audioContainer")
+    audioContainer
     .style.display =
     "block";
 
 
-    $("questionImage")
-    .style.display =
+    image.style.display =
     "none";
 
 
-    questionAudio.src =
+    audio.src =
     question.audio;
 
 
-    questionAudio.load();
+    audio.load();
 
   }
 
-  else if(
+  else if (
     question.image
   ) {
 
-    $("audioContainer")
+    audioContainer
     .style.display =
     "none";
 
 
-    $("questionImage")
-    .style.display =
+    image.style.display =
     "block";
 
 
-    $("questionImage")
-    .src =
+    image.src =
     question.image;
 
   }
 
   else {
 
-    $("audioContainer")
+    audioContainer
     .style.display =
     "none";
 
 
-    $("questionImage")
-    .style.display =
+    image.style.display =
     "none";
 
   }
@@ -2087,7 +2196,7 @@ function renderQuestion() {
 
   $("questionText")
   .textContent =
-  "مَا الحَرْفُ ؟";
+  "مَا الحَرْفُ؟";
 
 
   $("feedback")
@@ -2155,7 +2264,7 @@ function renderQuestion() {
 
 
 /* =========================================================
-   VÉRIFIER RÉPONSE
+   CHECK ANSWER
 ========================================================= */
 
 function checkAnswer(
@@ -2163,7 +2272,7 @@ function checkAnswer(
   answer
 ) {
 
-  if(
+  if (
     answered
   ) {
 
@@ -2195,9 +2304,7 @@ function checkAnswer(
   );
 
 
-  /* BONNE RÉPONSE */
-
-  if(
+  if (
     answer ===
     question.word
   ) {
@@ -2230,7 +2337,7 @@ function checkAnswer(
     100}%`;
 
 
-    if(
+    if (
       current ===
       gameQuestions.length - 1
     ) {
@@ -2252,9 +2359,6 @@ function checkAnswer(
 
   }
 
-
-  /* MAUVAISE RÉPONSE */
-
   else {
 
     button.classList.add(
@@ -2270,7 +2374,7 @@ function checkAnswer(
     .forEach(
       button => {
 
-        if(
+        if (
           button.textContent ===
           question.word
         ) {
@@ -2306,7 +2410,7 @@ function checkAnswer(
 
 
 /* =========================================================
-   QUESTION SUIVANTE
+   NEXT QUESTION
 ========================================================= */
 
 $("nextBtn")
@@ -2318,7 +2422,7 @@ $("nextBtn")
 
 function nextQuestion() {
 
-  if(
+  if (
     current <
     gameQuestions.length - 1
   ) {
@@ -2371,9 +2475,8 @@ async function finishGame() {
   `Vous avez obtenu ${correct} bonne(s) réponse(s) sur ${total}.`;
 
 
-  if(
-    correct ===
-    total
+  if (
+    correct === total
   ) {
 
     $("trophy")
@@ -2387,9 +2490,8 @@ async function finishGame() {
 
   }
 
-  else if(
-    correct >=
-    total * 0.7
+  else if (
+    correct >= total * .7
   ) {
 
     $("trophy")
@@ -2403,9 +2505,8 @@ async function finishGame() {
 
   }
 
-  else if(
-    correct >=
-    total * 0.5
+  else if (
+    correct >= total * .5
   ) {
 
     $("trophy")
@@ -2439,7 +2540,7 @@ async function finishGame() {
 
 
 /* =========================================================
-   ENREGISTRER RÉSULTAT
+   SAVE SCORE
 ========================================================= */
 
 async function saveScore() {
@@ -2448,7 +2549,7 @@ async function saveScore() {
   $("saveStatus");
 
 
-  if(
+  if (
     !firebaseUser
   ) {
 
