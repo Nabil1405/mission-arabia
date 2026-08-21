@@ -1,22 +1,1750 @@
-<!doctype html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mission : العربية — Professeur</title><style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#f7f2e8,#eadbc8);color:#2f241d;padding:20px}.app{max-width:950px;margin:auto;background:#fffdf9;border-radius:26px;overflow:hidden;box-shadow:0 18px 50px #37261926}header{background:#3f2b20;color:#fff;padding:24px 28px;display:flex;justify-content:space-between;align-items:center}header h1{margin:0;font-size:25px}header p{margin:6px 0 0;opacity:.8}.badge{background:#ffffff18;padding:10px 14px;border-radius:12px}main{padding:28px}.screen{display:none}.screen.active{display:block}.login{text-align:center;max-width:430px;margin:25px auto}.logo{font-size:52px}h2{font-size:28px;margin:10px 0}p{line-height:1.6;color:#6d5a4b}input{width:100%;padding:15px;border:2px solid #e1d5c8;border-radius:13px;font-size:16px;margin:7px 0 12px}button{border:0;border-radius:12px;padding:13px 20px;font-weight:bold;font-size:15px;cursor:pointer}.primary{background:#8b5e3c;color:#fff}.secondary{background:#eee5da;color:#3f2b20}.error{color:#a32f27;font-weight:bold;min-height:25px}.status{font-size:14px;min-height:24px;margin:12px 0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;flex-wrap:wrap}.title h2{margin:0;font-size:25px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}.stat{background:#f5eee5;padding:16px;border-radius:14px;text-align:center}.stat span{display:block;color:#6d5a4b;font-size:13px}.stat strong{display:block;font-size:24px;margin-top:5px}.table-wrap{overflow-x:auto;border:1px solid #eadfd4;border-radius:15px}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:15px 16px;text-align:left;border-bottom:1px solid #eee5da}th{background:#f5eee5;color:#5a4637;font-size:14px}td{font-size:15px}.score{font-weight:bold}.empty{text-align:center;padding:35px;color:#6d5a4b}.loading{text-align:center;padding:35px}.spinner{font-size:35px;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:600px){body{padding:0}.app{min-height:100vh;border-radius:0}main{padding:20px}.stats{grid-template-columns:1fr}}
-</style></head><body><div class="app"><header><div><h1>👨‍🏫 Mission : العربية</h1><p>Espace professeur</p></div><div class="badge" id="connectionBadge">🔒 Déconnecté</div></header><main>
-<section id="loginScreen" class="screen active"><div class="login"><div class="logo">📊</div><h2>Tableau de bord</h2><p>Connecte-toi avec ton compte professeur.</p><form id="loginForm"><input id="email" type="email" autocomplete="username" placeholder="Adresse e-mail" required><input id="password" type="password" autocomplete="current-password" placeholder="Mot de passe" required><div id="loginError" class="error"></div><button class="primary">🔐 Se connecter</button></form><div id="loginStatus" class="status"></div></div></section>
-<section id="loadingScreen" class="screen"><div class="loading"><div class="spinner">⏳</div><h2>Chargement des résultats...</h2><p>Récupération des scores depuis Firebase.</p></div></section>
-<section id="dashboardScreen" class="screen"><div class="topbar"><div class="title"><h2>📚 Résultats — Vocabulaire</h2><p>Prénom, score et date de la partie.</p></div><button class="secondary" id="logoutBtn">Se déconnecter</button></div><div class="stats"><div class="stat"><span>Parties jouées</span><strong id="gamesCount">0</strong></div><div class="stat"><span>Élèves</span><strong id="studentsCount">0</strong></div><div class="stat"><span>Score moyen</span><strong id="averageScore">0 / 100</strong></div></div><div id="tableStatus" class="status"></div><div class="table-wrap"><table><thead><tr><th>Prénom</th><th>Score</th><th>Date de la partie</th></tr></thead><tbody id="scoresBody"></tbody></table></div></section>
-</main></div>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mission : العربية — Espace professeur</title>
+
+
+<style>
+
+/* =========================
+   STYLE GÉNÉRAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        "Noto Sans",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7f2e8,
+            #eadbc8
+        );
+
+    color: #2f241d;
+
+    padding: 20px;
+}
+
+
+.app {
+
+    width: 100%;
+
+    max-width: 950px;
+
+    margin: auto;
+
+    background: #fffdf9;
+
+    border-radius: 26px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 18px 50px
+        rgba(55,38,25,0.15);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+
+    background: #3f2b20;
+
+    color: white;
+
+    padding: 24px 28px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+}
+
+
+header p {
+
+    margin: 6px 0 0;
+
+    color: white;
+
+    opacity: 0.8;
+
+    font-size: 14px;
+
+}
+
+
+.badge {
+
+    background: rgba(255,255,255,0.10);
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+
+    padding: 28px;
+
+}
+
+
+.screen {
+
+    display: none;
+
+}
+
+
+.screen.active {
+
+    display: block;
+
+}
+
+
+/* =========================
+   CONNEXION
+========================= */
+
+.login {
+
+    text-align: center;
+
+    max-width: 430px;
+
+    margin: 25px auto;
+
+}
+
+
+.logo {
+
+    font-size: 52px;
+
+}
+
+
+.login h2 {
+
+    font-size: 28px;
+
+    margin: 10px 0;
+
+}
+
+
+.login p {
+
+    color: #6d5a4b;
+
+    line-height: 1.6;
+
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border:
+
+        2px solid
+        #e1d5c8;
+
+    border-radius: 13px;
+
+    font-size: 16px;
+
+    margin:
+
+        7px 0
+        12px;
+
+    outline: none;
+
+}
+
+
+input:focus {
+
+    border-color: #8b5e3c;
+
+}
+
+
+button {
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding:
+        13px 20px;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+
+.primary {
+
+    background: #8b5e3c;
+
+    color: white;
+
+}
+
+
+.primary:hover {
+
+    background: #744c30;
+
+}
+
+
+.secondary {
+
+    background: #eee5da;
+
+    color: #3f2b20;
+
+}
+
+
+.error {
+
+    color: #a32f27;
+
+    font-weight: bold;
+
+    min-height: 25px;
+
+    margin: 5px 0;
+
+}
+
+
+.status {
+
+    font-size: 14px;
+
+    min-height: 24px;
+
+    margin: 12px 0;
+
+}
+
+
+/* =========================
+   CHARGEMENT
+========================= */
+
+.loading {
+
+    text-align: center;
+
+    padding: 35px;
+
+}
+
+
+.spinner {
+
+    font-size: 35px;
+
+    animation:
+        spin 1s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================
+   TABLEAU DE BORD
+========================= */
+
+.topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.title h2 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+}
+
+
+.title p {
+
+    margin: 5px 0;
+
+    color: #6d5a4b;
+
+}
+
+
+/* =========================
+   STATISTIQUES
+========================= */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.stat {
+
+    background: #f5eee5;
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+}
+
+
+.stat span {
+
+    display: block;
+
+    color: #6d5a4b;
+
+    font-size: 13px;
+
+}
+
+
+.stat strong {
+
+    display: block;
+
+    font-size: 24px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap {
+
+    overflow-x: auto;
+
+    border:
+        1px solid
+        #eadfd4;
+
+    border-radius: 15px;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse:
+        collapse;
+
+    background: white;
+
+}
+
+
+th,
+td {
+
+    padding: 15px 16px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid
+        #eee5da;
+
+}
+
+
+th {
+
+    background: #f5eee5;
+
+    color: #5a4637;
+
+    font-size: 14px;
+
+}
+
+
+td {
+
+    font-size: 15px;
+
+}
+
+
+tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+.score {
+
+    font-weight: bold;
+
+}
+
+
+.empty {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #6d5a4b;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-note {
+
+    text-align: center;
+
+    color: #8a7768;
+
+    font-size: 12px;
+
+    margin-top: 18px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 0;
+
+    }
+
+
+    .app {
+
+        min-height: 100vh;
+
+        border-radius: 0;
+
+    }
+
+
+    main {
+
+        padding: 20px;
+
+    }
+
+
+    .stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    th,
+    td {
+
+        padding:
+            12px 10px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div>
+
+        <h1>
+            👨‍🏫 Mission : العربية
+        </h1>
+
+        <p>
+            Espace professeur
+        </p>
+
+    </div>
+
+
+    <div
+        class="badge"
+        id="connectionBadge"
+    >
+        🔒 Déconnecté
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================
+     PAGE DE CONNEXION
+========================= -->
+
+<section
+    id="loginScreen"
+    class="screen active"
+>
+
+
+    <div class="login">
+
+
+        <div class="logo">
+            📊
+        </div>
+
+
+        <h2>
+            Tableau de bord
+        </h2>
+
+
+        <p>
+
+            Connecte-toi avec ton
+            compte professeur pour
+            consulter les résultats.
+
+        </p>
+
+
+
+        <form id="loginForm">
+
+
+            <input
+                id="email"
+                type="email"
+                autocomplete="username"
+                placeholder="Adresse e-mail"
+                required
+            >
+
+
+            <input
+                id="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Mot de passe"
+                required
+            >
+
+
+            <div
+                id="loginError"
+                class="error"
+            ></div>
+
+
+            <button
+                class="primary"
+                type="submit"
+            >
+
+                🔐 Se connecter
+
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="loginStatus"
+            class="status"
+        ></div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     CHARGEMENT
+========================= -->
+
+<section
+    id="loadingScreen"
+    class="screen"
+>
+
+
+    <div class="loading">
+
+
+        <div class="spinner">
+            ⏳
+        </div>
+
+
+        <h2>
+            Chargement des résultats...
+        </h2>
+
+
+        <p>
+
+            Récupération des scores
+            depuis Firebase.
+
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     TABLEAU DE BORD
+========================= -->
+
+<section
+    id="dashboardScreen"
+    class="screen"
+>
+
+
+    <div class="topbar">
+
+
+        <div class="title">
+
+
+            <h2>
+                📚 Résultats — Vocabulaire
+            </h2>
+
+
+            <p>
+                Prénom, score et date
+                de la partie.
+            </p>
+
+
+        </div>
+
+
+
+        <button
+            class="secondary"
+            id="logoutBtn"
+        >
+
+            Se déconnecter
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- STATISTIQUES -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <span>
+                Parties jouées
+            </span>
+
+            <strong
+                id="gamesCount"
+            >
+                0
+            </strong>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <span>
+                Élèves
+            </span>
+
+            <strong
+                id="studentsCount"
+            >
+                0
+            </strong>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <span>
+                Score moyen
+            </span>
+
+            <strong
+                id="averageScore"
+            >
+                0 %
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div
+        id="tableStatus"
+        class="status"
+    ></div>
+
+
+
+    <!-- TABLEAU -->
+
+    <div class="table-wrap">
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Prénom
+                    </th>
+
+                    <th>
+                        Score
+                    </th>
+
+                    <th>
+                        Date de la partie
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="scoresBody"
+            ></tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+    <div class="footer-note">
+
+        Les résultats sont récupérés
+        automatiquement depuis Firestore.
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+</div>
+
+
+
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,getDocs}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyCzcH48LRFuVqxryQsLDGX_JOAky7E2aOE",authDomain:"mission-arabia.firebaseapp.com",projectId:"mission-arabia",storageBucket:"mission-arabia.firebasestorage.app",messagingSenderId:"434432746016",appId:"1:434432746016:web:ea1641808436de258e5245",measurementId:"G-S0LDW67DPE"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),$=id=>document.getElementById(id);
-function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(id).classList.add("active")}
-$("loginForm").addEventListener("submit",async e=>{e.preventDefault();$("loginError").textContent="";$("loginStatus").textContent="Connexion…";try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value)}catch(err){console.error(err);$("loginError").textContent=err.code==="auth/invalid-credential"?"Adresse e-mail ou mot de passe incorrect.":"Impossible de se connecter.";$("loginStatus").textContent=""}});
-onAuthStateChanged(auth,async user=>{if(user){$("connectionBadge").textContent="🟢 Connecté";show("loadingScreen");await loadScores()}else{show("loginScreen");$("connectionBadge").textContent="🔒 Déconnecté"}});
-async function loadScores(){try{const snap=await getDocs(collection(db,"scores")),scores=[];snap.forEach(doc=>{const d=doc.data();if(d.game==="Mission : العربية")scores.push({name:d.studentName||"Inconnu",score:Number(d.score||0),total:Number(d.totalQuestions||0),date:d.createdAt})});scores.sort((a,b)=>(b.date?.toMillis?.()||0)-(a.date?.toMillis?.()||0));display(scores)}catch(err){console.error(err);$("tableStatus").textContent="❌ Impossible de récupérer les scores. Vérifie les règles Firestore.";show("dashboardScreen")}}
-function display(scores){show("dashboardScreen");const body=$("scoresBody");body.innerHTML="";if(!scores.length)body.innerHTML='<tr><td colspan="3" class="empty">Aucun résultat pour le moment.</td></tr>';let total=0;const students=new Set;scores.forEach(r=>{total+=r.score;students.add(r.name);const row=document.createElement("tr"),first=r.name.trim().split(/\s+/)[0]||"Inconnu",max=r.total?` / ${r.total*10}`:"";row.innerHTML=`<td>${esc(first)}</td><td class="score">${r.score}${max}</td><td>${esc(date(r.date))}</td>`;body.appendChild(row)});$("gamesCount").textContent=scores.length;$("studentsCount").textContent=students.size;$("averageScore").textContent=`${scores.length?Math.round(total/scores.length):0} / 100`;$("tableStatus").textContent=`${scores.length} partie(s) trouvée(s).`}
-function date(t){if(!t?.toDate)return"Date inconnue";return new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(t.toDate())}
-function esc(v){return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
-$("logoutBtn").addEventListener("click",()=>signOut(auth));
-</script></body></html>
+
+
+/* =====================================================
+   IMPORTS FIREBASE
+===================================================== */
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+
+    getAuth,
+
+    signInWithEmailAndPassword,
+
+    onAuthStateChanged,
+
+    signOut
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+
+    getFirestore,
+
+    collection,
+
+    getDocs
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* =====================================================
+   CONFIGURATION FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCzcH48LRFuVqxryQsLDGX_JOAky7E2aOE",
+
+    authDomain:
+        "mission-arabia.firebaseapp.com",
+
+    projectId:
+        "mission-arabia",
+
+    storageBucket:
+        "mission-arabia.firebasestorage.app",
+
+    messagingSenderId:
+        "434432746016",
+
+    appId:
+        "1:434432746016:web:ea1641808436de258e5245",
+
+    measurementId:
+        "G-S0LDW67DPE"
+
+};
+
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+
+/* =====================================================
+   RACCOURCI
+===================================================== */
+
+const $ =
+    id =>
+        document.getElementById(id);
+
+
+
+/* =====================================================
+   AFFICHER UNE PAGE
+===================================================== */
+
+function showScreen(id) {
+
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(
+            screen =>
+                screen.classList.remove("active")
+        );
+
+
+    $(id)
+        .classList.add("active");
+
+}
+
+
+
+/* =====================================================
+   CONNEXION
+===================================================== */
+
+$("loginForm")
+.addEventListener(
+    "submit",
+    async event => {
+
+
+        event.preventDefault();
+
+
+        $("loginError")
+            .textContent = "";
+
+
+        $("loginStatus")
+            .textContent =
+                "Connexion…";
+
+
+        try {
+
+
+            await signInWithEmailAndPassword(
+
+                auth,
+
+                $("email")
+                    .value
+                    .trim(),
+
+                $("password")
+                    .value
+
+            );
+
+
+        }
+
+        catch(error) {
+
+
+            console.error(error);
+
+
+            let message =
+                "Impossible de se connecter.";
+
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ) {
+
+                message =
+                    "Adresse e-mail ou mot de passe incorrect.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                message =
+                    "Adresse e-mail invalide.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ) {
+
+                message =
+                    "Trop de tentatives. Réessaie plus tard.";
+
+            }
+
+
+            $("loginError")
+                .textContent =
+                    message;
+
+
+            $("loginStatus")
+                .textContent = "";
+
+        }
+
+
+    }
+);
+
+
+
+/* =====================================================
+   SURVEILLER L'AUTHENTIFICATION
+===================================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async user => {
+
+
+        if(user) {
+
+
+            $("connectionBadge")
+                .textContent =
+                    "🟢 Connecté";
+
+
+            showScreen(
+                "loadingScreen"
+            );
+
+
+            await loadScores();
+
+
+        }
+
+
+        else {
+
+
+            $("connectionBadge")
+                .textContent =
+                    "🔒 Déconnecté";
+
+
+            showScreen(
+                "loginScreen"
+            );
+
+        }
+
+
+    }
+
+);
+
+
+
+/* =====================================================
+   CHARGER LES SCORES FIRESTORE
+===================================================== */
+
+async function loadScores() {
+
+
+    try {
+
+
+        const snapshot =
+
+            await getDocs(
+
+                collection(
+                    db,
+                    "scores"
+                )
+
+            );
+
+
+
+        const scores = [];
+
+
+
+        snapshot.forEach(
+
+            doc => {
+
+
+                const data =
+                    doc.data();
+
+
+
+                /*
+                =========================================
+                IMPORTANT
+
+                Ton jeu enregistre exactement :
+
+                game: "Mission : العربي"
+
+                et non :
+
+                game: "Mission : العربية"
+
+                Nous utilisons donc la valeur
+                exacte présente dans Firestore.
+                =========================================
+                */
+
+
+                if(
+
+                    data.game ===
+                    "Mission : العربي"
+
+                ) {
+
+
+                    scores.push({
+
+                        studentName:
+                            data.studentName ||
+                            "Inconnu",
+
+
+                        correctAnswers:
+                            Number(
+                                data.correctAnswers ||
+                                0
+                            ),
+
+
+                        totalQuestions:
+                            Number(
+                                data.totalQuestions ||
+                                0
+                            ),
+
+
+                        createdAt:
+                            data.createdAt
+
+                    });
+
+
+                }
+
+
+            }
+
+        );
+
+
+
+        /*
+        =========================================
+        TRI :
+
+        La partie la plus récente
+        apparaît en premier.
+        =========================================
+        */
+
+        scores.sort(
+
+            (a,b) =>
+
+                (
+                    b.createdAt
+                        ?.toMillis?.() ||
+                    0
+                )
+
+                -
+
+                (
+                    a.createdAt
+                        ?.toMillis?.() ||
+                    0
+                )
+
+        );
+
+
+
+        displayScores(
+            scores
+        );
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            "Erreur Firestore :",
+            error
+        );
+
+
+        $("tableStatus")
+            .textContent =
+                "❌ Impossible de récupérer les scores. Vérifie les règles Firestore.";
+
+
+        $("tableStatus")
+            .style.color =
+                "#8b2f27";
+
+
+        showScreen(
+            "dashboardScreen"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   AFFICHER LES SCORES
+===================================================== */
+
+function displayScores(scores) {
+
+
+    showScreen(
+        "dashboardScreen"
+    );
+
+
+    const body =
+        $("scoresBody");
+
+
+    body.innerHTML = "";
+
+
+
+    /*
+    =========================================
+    AUCUN SCORE
+    =========================================
+    */
+
+    if(
+        scores.length === 0
+    ) {
+
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="3"
+                    class="empty"
+                >
+
+                    Aucun résultat
+                    pour le moment.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+    }
+
+
+
+    let totalPercentage = 0;
+
+
+    const students =
+        new Set();
+
+
+
+    /*
+    =========================================
+    PARCOURIR LES PARTIES
+    =========================================
+    */
+
+    scores.forEach(
+
+        result => {
+
+
+            students.add(
+                result.studentName
+            );
+
+
+
+            /*
+            =================================
+            CALCUL DU POURCENTAGE
+
+            Exemple :
+
+            1 bonne réponse
+            sur 28 questions
+
+            = 4 %
+            =================================
+            */
+
+            let percentage = 0;
+
+
+            if(
+                result.totalQuestions > 0
+            ) {
+
+
+                percentage =
+
+                    Math.round(
+
+                        (
+                            result.correctAnswers
+                            /
+                            result.totalQuestions
+                        )
+                        *
+                        100
+
+                    );
+
+            }
+
+
+
+            totalPercentage +=
+                percentage;
+
+
+
+            /*
+            =================================
+            PRÉNOM
+            =================================
+            */
+
+            const firstName =
+                getFirstName(
+                    result.studentName
+                );
+
+
+
+            /*
+            =================================
+            SCORE
+
+            Exemple :
+
+            1 / 28 (4 %)
+            =================================
+            */
+
+            const scoreText =
+
+                `${result.correctAnswers} / ${result.totalQuestions} (${percentage} %)`;
+
+
+
+            /*
+            =================================
+            CRÉER LA LIGNE
+            =================================
+            */
+
+            const row =
+                document.createElement("tr");
+
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    ${escapeHtml(
+                        firstName
+                    )}
+
+                </td>
+
+
+                <td class="score">
+
+                    ${escapeHtml(
+                        scoreText
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHtml(
+                        formatDate(
+                            result.createdAt
+                        )
+                    )}
+
+                </td>
+
+            `;
+
+
+
+            body.appendChild(
+                row
+            );
+
+
+        }
+
+    );
+
+
+
+    /*
+    =========================================
+    STATISTIQUES
+    =========================================
+    */
+
+    $("gamesCount")
+        .textContent =
+            scores.length;
+
+
+
+    $("studentsCount")
+        .textContent =
+            students.size;
+
+
+
+    let average = 0;
+
+
+    if(
+        scores.length > 0
+    ) {
+
+
+        average =
+
+            Math.round(
+
+                totalPercentage
+                /
+                scores.length
+
+            );
+
+    }
+
+
+
+    $("averageScore")
+        .textContent =
+            `${average} %`;
+
+
+
+    $("tableStatus")
+        .textContent =
+            `${scores.length} partie(s) trouvée(s).`;
+
+}
+
+
+
+/* =====================================================
+   EXTRAIRE LE PRÉNOM
+===================================================== */
+
+function getFirstName(name) {
+
+
+    const clean =
+        String(
+            name || ""
+        )
+        .trim();
+
+
+    if(!clean) {
+
+        return "Inconnu";
+
+    }
+
+
+    return clean
+        .split(/\s+/)[0];
+
+}
+
+
+
+/* =====================================================
+   FORMATER LA DATE
+===================================================== */
+
+function formatDate(timestamp) {
+
+
+    if(
+
+        !timestamp ||
+
+        typeof timestamp.toDate !==
+        "function"
+
+    ) {
+
+
+        return "Date inconnue";
+
+    }
+
+
+
+    const date =
+        timestamp.toDate();
+
+
+
+    return new Intl.DateTimeFormat(
+
+        "fr-FR",
+
+        {
+
+            day:
+                "2-digit",
+
+            month:
+                "2-digit",
+
+            year:
+                "numeric",
+
+            hour:
+                "2-digit",
+
+            minute:
+                "2-digit"
+
+        }
+
+    )
+    .format(date);
+
+}
+
+
+
+/* =====================================================
+   PROTECTION HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   DÉCONNEXION
+===================================================== */
+
+$("logoutBtn")
+.addEventListener(
+
+    "click",
+
+    async () => {
+
+        await signOut(auth);
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
